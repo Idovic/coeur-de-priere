@@ -1,5 +1,15 @@
-
 import { PrayerTopic } from '../types/prayer';
+
+export const categoryColors = {
+  foi: 'blue',
+  famille: 'green',
+  sagesse: 'purple',
+  amour: 'pink',
+  protection: 'orange',
+  reconnaissance: 'yellow',
+  direction: 'indigo',
+  paix: 'teal'
+};
 
 export const prayerTopics: PrayerTopic[] = [
   // Foi & Confiance (1-15)
