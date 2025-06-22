@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { usePrayerStats } from '../hooks/usePrayerStats';
-import { prayerTopics } from '../data/prayers';
+import { prayers } from '../data/prayers';
 import { Heart, Calendar } from 'lucide-react';
 
 const PrayerHistory: React.FC = () => {
@@ -45,7 +44,7 @@ const PrayerHistory: React.FC = () => {
   };
 
   const getPrayerTitle = (prayerId: number) => {
-    const prayer = prayerTopics.find(p => p.id === prayerId);
+    const prayer = prayers.find(p => p.id === prayerId);
     return prayer?.title || 'Prière inconnue';
   };
 

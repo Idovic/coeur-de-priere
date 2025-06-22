@@ -1,6 +1,5 @@
-
 import React, { useState, useEffect } from 'react';
-import { prayerTopics } from '../data/prayers';
+import { prayers } from '../data/prayers';
 import { themes } from '../data/themes';
 import PrayerCard from '../components/PrayerCard';
 import PrayerReader from '../components/PrayerReader';
@@ -24,7 +23,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<'prayers' | 'stats' | 'history' | 'settings'>('prayers');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
-  const [prayers, setPrayers] = useState(prayerTopics);
+  const [prayersList, setPrayersList] = useState(prayers);
   const [showSplash, setShowSplash] = useState(true);
   const [viewMode, setViewMode] = useState<'themes' | 'list'>('themes');
   const [showNotificationSettings, setShowNotificationSettings] = useState(false);
@@ -50,7 +49,7 @@ const Index = () => {
   };
 
   // Filtrer les prières selon le thème sélectionné et la recherche
-  const filteredPrayers = prayers.filter(prayer => {
+  const filteredPrayers = prayersList.filter(prayer => {
     const matchesSearch = searchTerm === '' || 
       prayer.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       prayer.content.toLowerCase().includes(searchTerm.toLowerCase());
@@ -59,7 +58,7 @@ const Index = () => {
   });
 
   const handlePrayerClick = (prayer: PrayerTopic) => {
-    setPrayers(prev => prev.map(p => 
+    setPrayersList(prev => prev.map(p => 
       p.id === prayer.id 
         ? { ...p, readCount: p.readCount + 1 }
         : p
@@ -72,7 +71,7 @@ const Index = () => {
   };
 
   const handlePrayerComplete = (prayerId: number) => {
-    setPrayers(prev => prev.map(p => 
+    setPrayersList(prev => prev.map(p => 
       p.id === prayerId 
         ? { ...p, isCompleted: true, completedAt: new Date() }
         : p
@@ -91,8 +90,8 @@ const Index = () => {
   };
 
   const handleRandomPrayer = () => {
-    const randomIndex = Math.floor(Math.random() * prayers.length);
-    const randomPrayer = prayers[randomIndex];
+    const randomIndex = Math.floor(Math.random() * prayersList.length);
+    const randomPrayer = prayersList[randomIndex];
     handlePrayerClick(randomPrayer);
   };
 
@@ -115,14 +114,14 @@ const Index = () => {
 
   // Enhanced prayer count verification
   console.log(`=== PRAYER COUNT VERIFICATION ===`);
-  console.log(`Total prayers loaded: ${prayers.length}`);
+  console.log(`Total prayers loaded: ${prayersList.length}`);
   console.log(`Expected: 110 prayers`);
-  console.log(`Prayer IDs range: ${Math.min(...prayers.map(p => p.id))} to ${Math.max(...prayers.map(p => p.id))}`);
-  console.log(`Prayer 110 exists:`, prayers.find(p => p.id === 110) ? 'Yes' : 'No');
-  console.log(`Prayer 1 exists:`, prayers.find(p => p.id === 1) ? 'Yes' : 'No');
+  console.log(`Prayer IDs range: ${Math.min(...prayersList.map(p => p.id))} to ${Math.max(...prayersList.map(p => p.id))}`);
+  console.log(`Prayer 110 exists:`, prayersList.find(p => p.id === 110) ? 'Yes' : 'No');
+  console.log(`Prayer 1 exists:`, prayersList.find(p => p.id === 1) ? 'Yes' : 'No');
   
   // Check for duplicates
-  const ids = prayers.map(p => p.id);
+  const ids = prayersList.map(p => p.id);
   const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
   if (duplicates.length > 0) {
     console.log(`Duplicate IDs found:`, duplicates);
@@ -131,7 +130,7 @@ const Index = () => {
   // Check for missing IDs
   const missingIds = [];
   for (let i = 1; i <= 110; i++) {
-    if (!prayers.find(p => p.id === i)) {
+    if (!prayersList.find(p => p.id === i)) {
       missingIds.push(i);
     }
   }
@@ -182,7 +181,7 @@ const Index = () => {
             Votre compagnon spirituel au quotidien
           </p>
           <p className="text-prayer-700 text-sm font-inter max-w-md mx-auto">
-            Découvrez {prayers.length} prières organisées par thèmes pour enrichir votre relation avec Dieu
+            Découvrez {prayersList.length} prières organisées par thèmes pour enrichir votre relation avec Dieu
           </p>
         </div>
 
@@ -198,7 +197,7 @@ const Index = () => {
                   onFavorites={() => setViewMode('list')}
                   onDailyReading={handleRandomPrayer}
                   onShare={handleShare}
-                  prayers={prayers}
+                  prayers={prayersList}
                 />
               </div>
               <PrayerStreak />
@@ -219,7 +218,7 @@ const Index = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {themes.map((theme, index) => {
-                    const themePrayerCount = prayers.filter(p => p.category === theme.category).length;
+                    const themePrayerCount = prayersList.filter(p => p.category === theme.category).length;
                     return (
                       <div 
                         key={theme.id}
@@ -250,13 +249,13 @@ const Index = () => {
                     <div className="grid grid-cols-3 gap-6">
                       <div>
                         <div className="text-2xl font-bold text-prayer-700 mb-1">
-                          {prayers.filter(p => p.isCompleted).length}
+                          {prayersList.filter(p => p.isCompleted).length}
                         </div>
                         <div className="text-sm text-prayer-600">Prières explorées</div>
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-mystic-700 mb-1">
-                          {prayers.reduce((sum, p) => sum + p.readCount, 0)}
+                          {prayersList.reduce((sum, p) => sum + p.readCount, 0)}
                         </div>
                         <div className="text-sm text-prayer-600">Moments de prière</div>
                       </div>
