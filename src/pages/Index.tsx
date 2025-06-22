@@ -221,7 +221,7 @@ const Index = () => {
                       <h3 className="text-lg font-semibold text-prayer-800 font-nunito">Votre Parcours Spirituel</h3>
                     </div>
                     
-                    <div className="grid grid-cols-4 gap-6">
+                    <div className="grid grid-cols-3 gap-6">
                       <div>
                         <div className="text-2xl font-bold text-prayer-600 mb-1">
                           {prayers.filter(p => p.isCompleted).length}
@@ -239,12 +239,6 @@ const Index = () => {
                           {themes.length}
                         </div>
                         <div className="text-sm text-serenity-600">Thématiques</div>
-                      </div>
-                      <div>
-                        <div className="text-2xl font-bold text-orange-600 mb-1">
-                          110
-                        </div>
-                        <div className="text-sm text-serenity-600">Prières disponibles</div>
                       </div>
                     </div>
                   </div>
