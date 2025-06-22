@@ -20,8 +20,9 @@ export default {
 		},
 		extend: {
 			fontFamily: {
-				'sans': ['Poppins', 'system-ui', 'sans-serif'],
-				'poppins': ['Poppins', 'sans-serif'],
+				'sans': ['Inter', 'system-ui', 'sans-serif'],
+				'nunito': ['Nunito', 'sans-serif'],
+				'inter': ['Inter', 'sans-serif'],
 			},
 			colors: {
 				border: 'hsl(var(--border))',
@@ -67,31 +68,55 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// Couleurs spécifiques pour l'application de prière
+				// Couleurs spécifiques pour l'application de prière - Palette moderne bleu-violet
 				prayer: {
-					50: '#f0f4ff',
-					100: '#e0e8ff',
-					200: '#c7d2fe',
-					300: '#a5b4fc',
-					400: '#818cf8',
-					500: '#6366f1',
-					600: '#4f46e5',
-					700: '#4338ca',
-					800: '#3730a3',
-					900: '#312e81',
+					50: '#f8faff',
+					100: '#f0f4ff',
+					200: '#e6edff',
+					300: '#d1ddfe',
+					400: '#a5b8fc',
+					500: '#7c7af2',
+					600: '#6366f1',
+					700: '#5855ea',
+					800: '#4c46d6',
+					900: '#413bb8',
 				},
 				serenity: {
-					50: '#f8fafc',
-					100: '#f1f5f9',
-					200: '#e2e8f0',
-					300: '#cbd5e1',
-					400: '#94a3b8',
-					500: '#64748b',
-					600: '#475569',
-					700: '#334155',
-					800: '#1e293b',
-					900: '#0f172a',
+					50: '#f8fafe',
+					100: '#f1f5fd',
+					200: '#e8effa',
+					300: '#d4e2f6',
+					400: '#a8c5ed',
+					500: '#7ca8e4',
+					600: '#5084d1',
+					700: '#3d68bd',
+					800: '#2e4f99',
+					900: '#1f3575',
 				},
+				mystic: {
+					50: '#faf8ff',
+					100: '#f3f0ff',
+					200: '#ede5ff',
+					300: '#ddd0ff',
+					400: '#c4a7ff',
+					500: '#a67eff',
+					600: '#8b5cf6',
+					700: '#7c3aed',
+					800: '#6b21e3',
+					900: '#581c87',
+				},
+				harmony: {
+					50: '#f0f9ff',
+					100: '#e0f2fe',
+					200: '#bae6fd',
+					300: '#7dd3fc',
+					400: '#38bdf8',
+					500: '#0ea5e9',
+					600: '#0284c7',
+					700: '#0369a1',
+					800: '#075985',
+					900: '#0c4a6e',
+				}
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -100,10 +125,22 @@ export default {
 			},
 			backdropBlur: {
 				'xs': '2px',
+				'xl': '24px',
+				'2xl': '40px',
 			},
 			boxShadow: {
 				'glass': '0 8px 32px 0 rgba(31, 38, 135, 0.37)',
-				'prayer': '0 4px 20px 0 rgba(99, 102, 241, 0.15)',
+				'prayer': '0 4px 20px 0 rgba(124, 122, 242, 0.25)',
+				'soft': '0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04)',
+				'glow': '0 0 20px rgba(124, 122, 242, 0.3)',
+				'inner-light': 'inset 0 1px 0 0 rgba(255, 255, 255, 0.1)',
+			},
+			backgroundImage: {
+				'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+				'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+				'prayer-gradient': 'linear-gradient(135deg, #7c7af2 0%, #a67eff  50%, #5084d1 100%)',
+				'mystic-gradient': 'linear-gradient(135deg, #8b5cf6 0%, #7c7af2 50%, #0ea5e9 100%)',
+				'harmony-gradient': 'linear-gradient(135deg, #0ea5e9 0%, #7dd3fc 50%, #c4a7ff 100%)',
 			},
 			keyframes: {
 				'accordion-down': {
@@ -149,6 +186,22 @@ export default {
 					'50%': {
 						transform: 'translateY(-10px)'
 					}
+				},
+				'glow': {
+					'0%, 100%': {
+						boxShadow: '0 0 20px rgba(124, 122, 242, 0.3)'
+					},
+					'50%': {
+						boxShadow: '0 0 30px rgba(124, 122, 242, 0.5)'
+					}
+				},
+				'shimmer': {
+					'0%': {
+						backgroundPosition: '-200% 0'
+					},
+					'100%': {
+						backgroundPosition: '200% 0'
+					}
 				}
 			},
 			animation: {
@@ -157,6 +210,8 @@ export default {
 				'fade-in': 'fade-in 0.5s ease-out',
 				'scale-in': 'scale-in 0.3s ease-out',
 				'float': 'float 6s ease-in-out infinite',
+				'glow': 'glow 3s ease-in-out infinite',
+				'shimmer': 'shimmer 2s linear infinite',
 			}
 		}
 	},

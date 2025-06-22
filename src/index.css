@@ -16,7 +16,7 @@
     --popover: 220 23% 98%;
     --popover-foreground: 220 14% 11%;
 
-    --primary: 239 68% 68%;
+    --primary: 248 83% 75%;
     --primary-foreground: 220 23% 98%;
 
     --secondary: 220 16% 94%;
@@ -25,7 +25,7 @@
     --muted: 220 16% 94%;
     --muted-foreground: 220 9% 46%;
 
-    --accent: 233 76% 88%;
+    --accent: 265 89% 78%;
     --accent-foreground: 220 14% 11%;
 
     --destructive: 0 84% 60%;
@@ -33,18 +33,18 @@
 
     --border: 220 16% 88%;
     --input: 220 16% 88%;
-    --ring: 239 68% 68%;
+    --ring: 248 83% 75%;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
     --sidebar-background: 220 23% 97%;
     --sidebar-foreground: 220 14% 11%;
-    --sidebar-primary: 239 68% 68%;
+    --sidebar-primary: 248 83% 75%;
     --sidebar-primary-foreground: 220 23% 98%;
     --sidebar-accent: 220 16% 94%;
     --sidebar-accent-foreground: 220 14% 11%;
     --sidebar-border: 220 16% 88%;
-    --sidebar-ring: 239 68% 68%;
+    --sidebar-ring: 248 83% 75%;
   }
 
   .dark {
@@ -57,7 +57,7 @@
     --popover: 220 27% 9%;
     --popover-foreground: 220 23% 95%;
 
-    --primary: 239 68% 68%;
+    --primary: 248 83% 75%;
     --primary-foreground: 220 27% 8%;
 
     --secondary: 220 20% 14%;
@@ -66,7 +66,7 @@
     --muted: 220 20% 14%;
     --muted-foreground: 220 9% 60%;
 
-    --accent: 233 76% 25%;
+    --accent: 265 89% 78%;
     --accent-foreground: 220 23% 95%;
 
     --destructive: 0 84% 60%;
@@ -74,16 +74,16 @@
 
     --border: 220 20% 14%;
     --input: 220 20% 14%;
-    --ring: 239 68% 68%;
+    --ring: 248 83% 75%;
 
     --sidebar-background: 220 27% 8%;
     --sidebar-foreground: 220 23% 95%;
-    --sidebar-primary: 239 68% 68%;
+    --sidebar-primary: 248 83% 75%;
     --sidebar-primary-foreground: 220 27% 8%;
     --sidebar-accent: 220 20% 14%;
     --sidebar-accent-foreground: 220 23% 95%;
     --sidebar-border: 220 20% 14%;
-    --sidebar-ring: 239 68% 68%;
+    --sidebar-ring: 248 83% 75%;
   }
 }
 
@@ -93,34 +93,86 @@
   }
 
   body {
-    @apply bg-gradient-to-br from-prayer-50 via-serenity-50 to-purple-50 text-foreground font-poppins;
+    @apply bg-gradient-to-br from-prayer-50 via-harmony-50 to-mystic-50 text-foreground font-nunito;
     min-height: 100vh;
+    background-attachment: fixed;
+  }
+  
+  /* Amélioration de la lisibilité */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-nunito font-semibold;
+  }
+  
+  p, span, div {
+    @apply font-inter;
   }
 }
 
-/* Glassmorphism utilities */
+/* Glassmorphism utilities améliorés */
 @layer utilities {
   .glass {
-    @apply bg-white/20 backdrop-blur-md border border-white/20;
+    @apply bg-white/25 backdrop-blur-xl border border-white/30 shadow-soft;
+    backdrop-filter: blur(16px);
   }
   
   .glass-strong {
-    @apply bg-white/30 backdrop-blur-lg border border-white/30;
+    @apply bg-white/35 backdrop-blur-2xl border border-white/40 shadow-prayer;
+    backdrop-filter: blur(24px);
+  }
+  
+  .glass-card {
+    @apply bg-gradient-to-br from-white/30 to-white/10 backdrop-blur-xl border border-white/20 shadow-prayer;
+    backdrop-filter: blur(20px);
+  }
+  
+  .glass-navbar {
+    @apply bg-white/40 backdrop-blur-2xl border-t border-white/30 shadow-soft;
+    backdrop-filter: blur(32px);
   }
   
   .prayer-gradient {
     background: linear-gradient(135deg, 
-      rgba(99, 102, 241, 0.1) 0%, 
-      rgba(168, 85, 247, 0.1) 50%,
-      rgba(59, 130, 246, 0.1) 100%);
+      rgba(124, 122, 242, 0.15) 0%, 
+      rgba(166, 126, 255, 0.15) 50%,
+      rgba(80, 132, 209, 0.15) 100%);
+  }
+  
+  .mystic-gradient {
+    background: linear-gradient(135deg, 
+      rgba(139, 92, 246, 0.2) 0%, 
+      rgba(124, 122, 242, 0.2) 50%,
+      rgba(14, 165, 233, 0.2) 100%);
   }
   
   .text-gradient {
-    @apply bg-gradient-to-r from-prayer-600 to-purple-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-prayer-600 via-mystic-600 to-harmony-600 bg-clip-text text-transparent;
+  }
+  
+  .text-gradient-soft {
+    @apply bg-gradient-to-r from-prayer-500 via-mystic-500 to-harmony-500 bg-clip-text text-transparent;
   }
   
   .floating {
     @apply animate-float;
+  }
+  
+  .glow-effect {
+    @apply animate-glow;
+  }
+  
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    background-size: 200% 100%;
+    @apply animate-shimmer;
+  }
+  
+  /* Boutons modernes avec effet glassmorphism */
+  .btn-glass {
+    @apply glass-strong px-6 py-3 rounded-2xl font-medium transition-all duration-300 hover:scale-105 hover:shadow-glow active:scale-95;
+  }
+  
+  .btn-gradient {
+    @apply bg-prayer-gradient text-white px-6 py-3 rounded-2xl font-medium shadow-prayer transition-all duration-300 hover:scale-105 hover:shadow-glow active:scale-95;
   }
 }
 
@@ -129,12 +181,52 @@
   font-size: 1.125rem;
   line-height: 1.8;
   letter-spacing: 0.025em;
+  @apply font-inter;
 }
 
 .zen-reading h1, .zen-reading h2 {
-  @apply text-prayer-700 font-semibold mb-4;
+  @apply text-prayer-700 font-nunito font-semibold mb-6;
 }
 
 .zen-reading p {
   @apply mb-4 text-serenity-700;
+}
+
+/* Améliorations pour les cartes */
+.prayer-card {
+  @apply glass-card hover:glass-strong transition-all duration-500 cursor-pointer group transform hover:scale-[1.02] hover:shadow-prayer;
+}
+
+.prayer-card:hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.4) 0%, 
+    rgba(255, 255, 255, 0.2) 100%);
+}
+
+/* Navigation améliorée */
+.nav-button {
+  @apply flex flex-col items-center gap-2 py-3 px-4 rounded-2xl transition-all duration-300 relative overflow-hidden;
+}
+
+.nav-button.active {
+  @apply bg-prayer-gradient text-white shadow-prayer transform scale-105;
+}
+
+.nav-button.active::before {
+  content: '';
+  @apply absolute inset-0 shimmer;
+}
+
+.nav-button:not(.active) {
+  @apply text-prayer-600 hover:bg-white/30 hover:text-prayer-700 hover:scale-105;
+}
+
+/* Effets de survol pour les éléments interactifs */
+.interactive-element {
+  @apply transition-all duration-300 hover:scale-105 active:scale-95;
+}
+
+/* Badge moderne */
+.modern-badge {
+  @apply px-3 py-1 rounded-full text-xs font-medium glass border border-white/30 backdrop-blur-lg;
 }
