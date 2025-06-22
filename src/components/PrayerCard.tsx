@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { PrayerTopic, categoryColors } from '../data/prayers';
+import { PrayerTopic } from '../types/prayer';
+import { categoryColors } from '../data/prayers';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { Check, Heart } from 'lucide-react';
