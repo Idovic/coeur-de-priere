@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { prayerTopics } from '../data/prayers';
 import { themes } from '../data/themes';
@@ -9,20 +8,40 @@ import PrayerHistory from '../components/PrayerHistory';
 import NavigationBar from '../components/NavigationBar';
 import ThemeCard from '../components/ThemeCard';
 import SplashScreen from '../components/SplashScreen';
+import NotificationSettings from '../components/NotificationSettings';
+import PrayerStreak from '../components/PrayerStreak';
+import QuickActions from '../components/QuickActions';
 import { Card } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
 import { Input } from '../components/ui/input';
+import { Button } from '../components/ui/button';
 import { PrayerTopic } from '../types/prayer';
-import { Heart, Sparkles, Search, Filter } from 'lucide-react';
+import { Heart, Sparkles, Search, Filter, Settings, Shuffle, Share2 } from 'lucide-react';
 
 const Index = () => {
   const [selectedPrayer, setSelectedPrayer] = useState<PrayerTopic | null>(null);
-  const [activeTab, setActiveTab] = useState<'prayers' | 'stats' | 'history'>('prayers');
+  const [activeTab, setActiveTab] = useState<'prayers' | 'stats' | 'history' | 'settings'>('prayers');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
   const [prayers, setPrayers] = useState(prayerTopics);
   const [showSplash, setShowSplash] = useState(true);
   const [viewMode, setViewMode] = useState<'themes' | 'list'>('themes');
+  const [showNotificationSettings, setShowNotificationSettings] = useState(false);
+
+  // PWA installation
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      // @ts-ignore
+      window.deferredPrompt = e;
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
 
   // Gestion du splash screen
   const handleSplashComplete = () => {
@@ -70,6 +89,32 @@ const Index = () => {
     setSearchTerm('');
   };
 
+  const handleRandomPrayer = () => {
+    const randomIndex = Math.floor(Math.random() * prayers.length);
+    const randomPrayer = prayers[randomIndex];
+    handlePrayerClick(randomPrayer);
+  };
+
+  const handleShare = async () => {
+    if (navigator.share) {
+      try {
+        await navigator.share({
+          title: 'Cœur de Prière',
+          text: 'Découvrez cette application de prière qui transforme ma vie spirituelle',
+          url: window.location.href,
+        });
+      } catch (error) {
+        console.log('Erreur lors du partage:', error);
+      }
+    } else {
+      // Fallback pour les navigateurs qui ne supportent pas Web Share API
+      navigator.clipboard.writeText(window.location.href);
+    }
+  };
+
+  // Verify that all 110 prayers are loaded
+  console.log(`Total prayers loaded: ${prayers.length}`);
+
   if (showSplash) {
     return <SplashScreen onComplete={handleSplashComplete} />;
   }
@@ -95,7 +140,7 @@ const Index = () => {
 
       <div className="container mx-auto px-4 py-6 pb-24 max-w-6xl relative z-10">
         
-        {/* Header */}
+        {/* Enhanced Header */}
         <div className="text-center mb-8 animate-fade-in">
           <div className="floating mb-6">
             <div className="relative inline-block">
@@ -109,29 +154,46 @@ const Index = () => {
             Cœur de Prière
           </h1>
           <p className="text-serenity-600 text-xl font-medium mb-2 font-inter">
-            Votre parcours spirituel personnalisé
+            Votre compagnon spirituel au quotidien
+          </p>
+          <p className="text-serenity-500 text-sm font-inter max-w-md mx-auto">
+            Découvrez 110 prières organisées par thèmes pour enrichir votre relation avec Dieu
           </p>
         </div>
 
-        {/* Contenu selon l'onglet actif */}
+        {/* Content selon l'onglet actif */}
         {activeTab === 'prayers' && (
           <div className="space-y-8">
             
+            {/* Quick Actions and Streak */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2">
+                <QuickActions
+                  onRandomPrayer={handleRandomPrayer}
+                  onFavorites={() => setViewMode('list')}
+                  onDailyReading={handleRandomPrayer}
+                  onShare={handleShare}
+                />
+              </div>
+              <PrayerStreak />
+            </div>
+
             {/* Vue thématique moderne */}
             {viewMode === 'themes' && (
               <>
                 <div className="text-center mb-8">
                   <h2 className="text-2xl font-bold text-prayer-800 mb-4 font-nunito">
-                    Explorez par Thématiques
+                    Explorez par Thématiques Spirituelles
                   </h2>
-                  <p className="text-serenity-600 font-inter">
-                    Choisissez le domaine qui correspond à vos besoins spirituels du moment
+                  <p className="text-serenity-600 font-inter max-w-2xl mx-auto">
+                    Chaque thème contient des prières soigneusement sélectionnées pour vous accompagner 
+                    dans vos différents besoins spirituels et moments de vie
                   </p>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {themes.map((theme, index) => {
-                    const themeePrayerCount = prayers.filter(p => p.category === theme.category).length;
+                    const themePrayerCount = prayers.filter(p => p.category === theme.category).length;
                     return (
                       <div 
                         key={theme.id}
@@ -143,7 +205,7 @@ const Index = () => {
                           description={theme.description}
                           icon={theme.icon}
                           gradient={theme.gradient}
-                          prayerCount={themeePrayerCount}
+                          prayerCount={themePrayerCount}
                           onClick={() => handleThemeClick(theme.category)}
                         />
                       </div>
@@ -151,32 +213,38 @@ const Index = () => {
                   })}
                 </div>
 
-                {/* Statistiques rapides */}
+                {/* Enhanced statistics */}
                 <Card className="glass-card border-white/30 animate-fade-in">
                   <div className="p-6 text-center">
                     <div className="flex items-center justify-center gap-2 mb-4">
                       <Sparkles className="w-5 h-5 text-prayer-500" />
-                      <h3 className="text-lg font-semibold text-prayer-800 font-nunito">Votre Progression</h3>
+                      <h3 className="text-lg font-semibold text-prayer-800 font-nunito">Votre Parcours Spirituel</h3>
                     </div>
                     
-                    <div className="grid grid-cols-3 gap-6">
+                    <div className="grid grid-cols-4 gap-6">
                       <div>
                         <div className="text-2xl font-bold text-prayer-600 mb-1">
                           {prayers.filter(p => p.isCompleted).length}
                         </div>
-                        <div className="text-sm text-serenity-600">Prières complétées</div>
+                        <div className="text-sm text-serenity-600">Prières explorées</div>
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-mystic-600 mb-1">
                           {prayers.reduce((sum, p) => sum + p.readCount, 0)}
                         </div>
-                        <div className="text-sm text-serenity-600">Lectures totales</div>
+                        <div className="text-sm text-serenity-600">Moments de prière</div>
                       </div>
                       <div>
                         <div className="text-2xl font-bold text-harmony-600 mb-1">
                           {themes.length}
                         </div>
                         <div className="text-sm text-serenity-600">Thématiques</div>
+                      </div>
+                      <div>
+                        <div className="text-2xl font-bold text-orange-600 mb-1">
+                          110
+                        </div>
+                        <div className="text-sm text-serenity-600">Prières disponibles</div>
                       </div>
                     </div>
                   </div>
@@ -253,6 +321,12 @@ const Index = () => {
 
         {activeTab === 'stats' && <StatsOverview />}
         {activeTab === 'history' && <PrayerHistory />}
+        {activeTab === 'settings' && (
+          <div className="space-y-6">
+            <NotificationSettings />
+            {/* Add other settings components here */}
+          </div>
+        )}
       </div>
 
       <NavigationBar activeTab={activeTab} onTabChange={setActiveTab} />

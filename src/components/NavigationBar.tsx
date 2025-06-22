@@ -1,61 +1,37 @@
 
 import React from 'react';
-import { Heart, Check, Clock } from 'lucide-react';
+import { Book, BarChart3, History, Settings } from 'lucide-react';
 
 interface NavigationBarProps {
-  activeTab: 'prayers' | 'stats' | 'history';
-  onTabChange: (tab: 'prayers' | 'stats' | 'history') => void;
+  activeTab: 'prayers' | 'stats' | 'history' | 'settings';
+  onTabChange: (tab: 'prayers' | 'stats' | 'history' | 'settings') => void;
 }
 
 const NavigationBar: React.FC<NavigationBarProps> = ({ activeTab, onTabChange }) => {
   const tabs = [
-    {
-      id: 'prayers' as const,
-      label: 'Prières',
-      icon: Heart
-    },
-    {
-      id: 'stats' as const,
-      label: 'Progression',
-      icon: Check
-    },
-    {
-      id: 'history' as const,
-      label: 'Historique',
-      icon: Clock
-    }
+    { id: 'prayers' as const, icon: Book, label: 'Prières' },
+    { id: 'stats' as const, icon: BarChart3, label: 'Progrès' },
+    { id: 'history' as const, icon: History, label: 'Historique' },
+    { id: 'settings' as const, icon: Settings, label: 'Paramètres' },
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-50">
-      <div className="glass-strong border-t border-white/30 px-4 py-2">
-        <div className="flex justify-around items-center max-w-md mx-auto">
-          {tabs.map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.id;
-            
-            return (
-              <button
-                key={tab.id}
-                onClick={() => onTabChange(tab.id)}
-                className={`
-                  flex flex-col items-center gap-1 py-2 px-4 rounded-xl transition-all duration-300
-                  ${isActive 
-                    ? 'bg-prayer-500 text-white shadow-lg transform scale-105' 
-                    : 'text-prayer-600 hover:bg-white/30 hover:text-prayer-700'
-                  }
-                `}
-              >
-                <Icon className={`w-5 h-5 ${isActive ? 'animate-pulse' : ''}`} />
-                <span className="text-xs font-medium">
-                  {tab.label}
-                </span>
-              </button>
-            );
-          })}
+    <nav className="fixed bottom-0 left-0 right-0 z-50 glass-navbar">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-around py-3">
+          {tabs.map(({ id, icon: Icon, label }) => (
+            <button
+              key={id}
+              onClick={() => onTabChange(id)}
+              className={`nav-button ${activeTab === id ? 'active' : ''}`}
+            >
+              <Icon className="w-5 h-5" />
+              <span className="text-xs font-medium">{label}</span>
+            </button>
+          ))}
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 
