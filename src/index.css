@@ -194,7 +194,7 @@
 
 /* Améliorations pour les cartes */
 .prayer-card {
-  @apply glass-card hover:glass-strong transition-all duration-500 cursor-pointer group transform hover:scale-[1.02] hover:shadow-prayer;
+  @apply glass-card hover:glass-strong transition-all duration-500 cursor-pointer transform hover:scale-[1.02] hover:shadow-prayer;
 }
 
 .prayer-card:hover {

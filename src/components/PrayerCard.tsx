@@ -18,7 +18,7 @@ const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick }) => {
 
   return (
     <Card 
-      className="glass hover:glass-strong transition-all duration-300 cursor-pointer group border-white/30 hover:border-white/50 hover:shadow-prayer transform hover:scale-[1.02]"
+      className="prayer-card group border-white/30 hover:border-white/50"
       onClick={onClick}
     >
       <div className="p-6">
