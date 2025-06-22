@@ -112,8 +112,10 @@ const Index = () => {
     }
   };
 
-  // Verify that all 110 prayers are loaded
+  // Verify that all 110 prayers are loaded with detailed logging
   console.log(`Total prayers loaded: ${prayers.length}`);
+  console.log(`Prayer IDs range: ${Math.min(...prayers.map(p => p.id))} to ${Math.max(...prayers.map(p => p.id))}`);
+  console.log(`Prayer 110 exists:`, prayers.find(p => p.id === 110) ? 'Yes' : 'No');
 
   if (showSplash) {
     return <SplashScreen onComplete={handleSplashComplete} />;

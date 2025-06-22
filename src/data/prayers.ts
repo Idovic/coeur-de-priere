@@ -803,73 +803,73 @@ export const prayerTopics: PrayerTopic[] = [
   },
   {
     id: 101,
-    title: "Demander l'unité dans les familles recomposées",
-    content: "Seigneur, unis les familles recomposées dans l'amour et la paix. Amen.",
-    category: "famille",
-    isCompleted: false,
-    readCount: 0
-  },
-  {
-    id: 102,
-    title: "Prier pour la sagesse dans la gestion des conflits",
-    content: "Dieu, donne-moi la sagesse pour gérer les conflits avec paix. Amen.",
+    title: "Prier pour la sagesse dans les amitiés et relations",
+    content: "Seigneur, Ta Parole dit dans Proverbes 13:20 : « Celui qui fréquente les sages devient sage… ». Apprends-moi à choisir et à entretenir des amitiés selon Ton cœur. Accorde-moi l'intelligence et le discernement pour distinguer les relations qui élèvent de celles qui égarent. Donne-moi d'être moi-même un ami fidèle, vrai, encourageant, et que toute influence soit à la gloire de Ton Nom. Protège mes relations des jalousies, des trahisons, des malentendus et fais de mes liens une source de croissance et de bénédiction. Amen.",
     category: "sagesse",
     isCompleted: false,
     readCount: 0
   },
   {
-    id: 103,
-    title: "Demander l'amour pour les personnes en souffrance",
-    content: "Seigneur, remplis les cœurs souffrants de Ton amour guérisseur. Amen.",
+    id: 102,
+    title: "Demander la restauration et la bénédiction dans le couple",
+    content: "Père, Toi qui unis les cœurs, je Te confie mon couple (ou ceux de mon entourage). Il est dit dans Ecclésiaste 4:12 : « …la corde à trois fils ne se rompt pas facilement. » Viens restaurer ce qui est brisé, ranimer l'amour là où il s'est refroidi, renouveler le respect, la tendresse, le dialogue. Mets Ta main dans chaque conflit ou blessure, accorde pardon, paix et renouveau. Que Ton amour et Ta paix soient le fondement de notre union, pour un témoignage fort et joyeux autour de nous. Amen.",
     category: "amour",
     isCompleted: false,
     readCount: 0
   },
   {
-    id: 104,
-    title: "Prier pour le pardon des fautes envers Dieu",
-    content: "Père, pardonne-moi mes fautes envers Toi et renouvelle mon cœur. Amen.",
+    id: 103,
+    title: "Prier pour les personnes en prison ou condamnées",
+    content: "Éternel, Père de miséricorde, Ta Parole dit dans Hébreux 13:3 « Souvenez-vous des prisonniers… ». Je prie pour toutes celles et ceux qui sont privés de liberté, que l'ombre de la solitude, du regret ou de la honte ne les écrase pas. Fais leur grâce de la repentance, accorde-leur des occasions de renaissance et de guérison, soulage leurs familles. Que Ta lumière pénètre même les cellules les plus sombres : donne-leur une espérance nouvelle et entoure-les de gestes de respect et de soutien. Amen.",
     category: "pardon",
     isCompleted: false,
     readCount: 0
   },
   {
-    id: 105,
-    title: "Remercier pour la joie de la vie nouvelle en Christ",
-    content: "Merci Seigneur pour la vie nouvelle que Tu m'as donnée. Amen.",
-    category: "reconnaissance",
+    id: 104,
+    title: "Prier pour la réconciliation et la paix dans la société",
+    content: "Dieu de paix et d'unité, regarde les fractures sociales, ethniques, économiques qui divisent notre société. « Il n'y a plus ni Juif ni Grec… vous êtes tous un en Jésus-Christ » (Galates 3:28). Renverse les préjugés, brise les barrières d'indifférence, de peur, de racisme ou de haine. Suscite des artisans de paix, inspire des initiatives de justice, de dialogue, d'entraide. Fais de Ton Église un exemple vivant d'unité dans la diversité, pour la guérison de tous. Amen.",
+    category: "paix",
     isCompleted: false,
     readCount: 0
   },
   {
-    id: 106,
-    title: "Prier pour la protection des missionnaires",
-    content: "Dieu, protège et fortifie les missionnaires dans leur travail. Amen.",
+    id: 105,
+    title: "Demander la protection et la victoire sur les tentations et addictions",
+    content: "Seigneur Jésus, Toi qui as été tenté en toute chose sans commettre de faute (Hébreux 4:15), je Te supplie pour la force de résister aux tentations qui m'assaillent, et pour la délivrance de tout lien d'addiction. Fortifie mon esprit dans l'épreuve, donne-moi des appuis solides et des relations saines. Quand je suis faible, porte-moi par Ta grâce, et déploie Ta puissance pour une liberté complète. Que Ton Saint-Esprit remplisse tout vide en moi, pour que je vive dans une vraie victoire. Amen.",
     category: "protection",
     isCompleted: false,
     readCount: 0
   },
   {
-    id: 107,
-    title: "Demander la direction dans les choix professionnels",
-    content: "Seigneur, guide-moi dans ma carrière selon Ta volonté. Amen.",
+    id: 106,
+    title: "Prier pour la réussite aux examens et concours",
+    content: "Père de lumière, je viens déposer devant Toi toutes mes études, projets, examens et concours. Il est écrit dans Daniel 1:17 « Dieu accorda à ces jeunes gens de la science et de l'intelligence dans toutes les lettres et toute la sagesse ». Donne-moi la mémoire, la compréhension, la concentration et la paix ; éloigne la peur, le stress et le doute. Bénis tous mes efforts, éclaire mes choix, et ouvre devant moi les portes de la réussite selon Ta volonté. Je remets mon avenir entre Tes mains bienveillantes. Amen.",
     category: "direction",
     isCompleted: false,
     readCount: 0
   },
   {
+    id: 107,
+    title: "Demander l'audace de partager l'Évangile à ceux de sa famille et à ses proches",
+    content: "Seigneur, Tu mets sur mon cœur le salut de mes proches. Ta Parole déclare dans Actes 16:31 : « Crois au Seigneur Jésus, et tu seras sauvé, toi et ta famille. » Donne-moi le discernement, le bon moment, les paroles justes et un témoignage cohérent. Ouvre les cœurs à la vérité de l'Évangile : visite ma famille, mes amis, mes collègues. Donne-moi l'audace d'oser dire Jésus, avec humilité et amour, et rends mon témoignage irrésistible par la puissance de Ton Esprit. Amen.",
+    category: "foi",
+    isCompleted: false,
+    readCount: 0
+  },
+  {
     id: 108,
-    title: "Prier pour la paix dans les cœurs en deuil",
-    content: "Prince de la paix, console ceux qui pleurent et remplis-les de Ta paix. Amen.",
+    title: "Prier pour la paix intérieure et la joie profonde en temps de solitude",
+    content: "Père, Toi qui connais la solitude et les saisons de silence, je T'invite à remplir mon cœur et ma maison de Ta présence vivante. Il est écrit dans Psaume 16:11 : « Il y a d'abondantes joies devant Ta face, des délices éternelles à Ta droite. » Que mon vide humain soit comblé par Ta compagnie, que Tu sois mon réconfort et ma joie. Donne-moi d'apprécier le calme, de cultiver la prière, la louange, la lecture ; enseigne-moi à être heureux avec Toi, même sans compagnie humaine. Amen.",
     category: "paix",
     isCompleted: false,
     readCount: 0
   },
   {
     id: 109,
-    title: "Demander la force pour témoigner de l'Évangile",
-    content: "Seigneur, donne-moi le courage de partager l'Évangile avec audace. Amen.",
-    category: "foi",
+    title: "Demander la grâce de bénir ses ennemis et ceux qui nous persécutent",
+    content: "Seigneur Jésus, Tu as dit : « Aimez vos ennemis ; bénissez ceux qui vous maudissent… » (Matthieu 5:44). Donne-moi la force de ne pas répondre au mal par le mal, mais de prier pour ceux qui me blessent, me rejettent ou me persécutent. Libère-moi du ressentiment, donne-moi d'espérer leur conversion et leur bonheur réel. Que ma vie soit un témoignage de Ta grâce et que le pardon triomphe sur la vengeance, pour la gloire de Ton nom. Amen.",
+    category: "amour",
     isCompleted: false,
     readCount: 0
   },
