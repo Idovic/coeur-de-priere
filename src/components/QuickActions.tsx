@@ -1,22 +1,38 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Heart, Shuffle, BookOpen, Bell, Share2, Download } from 'lucide-react';
+import { PrayerTopic } from '../types/prayer';
 
 interface QuickActionsProps {
   onRandomPrayer: () => void;
   onFavorites: () => void;
   onDailyReading: () => void;
   onShare: () => void;
+  prayers?: PrayerTopic[];
 }
 
 const QuickActions: React.FC<QuickActionsProps> = ({
   onRandomPrayer,
   onFavorites,
   onDailyReading,
-  onShare
+  onShare,
+  prayers = []
 }) => {
+  const [favorites, setFavorites] = useState<number[]>(() => {
+    const saved = localStorage.getItem('prayerFavorites');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  const handleFavoritesClick = () => {
+    console.log('Favorites clicked, count:', favorites.length);
+    // For now, we'll filter prayers and show them
+    const favoritePrayers = prayers.filter(p => favorites.includes(p.id));
+    console.log('Favorite prayers:', favoritePrayers);
+    onFavorites(); // This will switch to list view
+  };
+
   const installPWA = () => {
     // @ts-ignore
     if (window.deferredPrompt) {
@@ -34,8 +50,8 @@ const QuickActions: React.FC<QuickActionsProps> = ({
   };
 
   return (
-    <Card className="glass-card border-white/30 p-6 animate-fade-in">
-      <h3 className="text-lg font-semibold text-prayer-800 mb-4 font-nunito">
+    <Card className="glass-card border-white/40 bg-white/60 backdrop-blur-xl p-6 animate-fade-in shadow-xl">
+      <h3 className="text-lg font-semibold text-prayer-900 mb-4 font-nunito">
         Actions Rapides
       </h3>
       
@@ -43,25 +59,25 @@ const QuickActions: React.FC<QuickActionsProps> = ({
         <Button
           onClick={onRandomPrayer}
           variant="outline"
-          className="bg-white/20 border-prayer-300 text-prayer-700 hover:bg-prayer-50 h-auto py-3 flex-col gap-2"
+          className="bg-white/40 border-prayer-400 text-prayer-800 hover:bg-prayer-100 hover:border-prayer-500 h-auto py-3 flex-col gap-2 font-semibold"
         >
           <Shuffle className="w-5 h-5" />
           <span className="text-xs">Prière surprise</span>
         </Button>
 
         <Button
-          onClick={onFavorites}
+          onClick={handleFavoritesClick}
           variant="outline"
-          className="bg-white/20 border-mystic-300 text-mystic-700 hover:bg-mystic-50 h-auto py-3 flex-col gap-2"
+          className="bg-white/40 border-mystic-400 text-mystic-800 hover:bg-mystic-100 hover:border-mystic-500 h-auto py-3 flex-col gap-2 font-semibold"
         >
           <Heart className="w-5 h-5" />
-          <span className="text-xs">Mes favoris</span>
+          <span className="text-xs">Mes favoris ({favorites.length})</span>
         </Button>
 
         <Button
           onClick={onDailyReading}
           variant="outline"
-          className="bg-white/20 border-harmony-300 text-harmony-700 hover:bg-harmony-50 h-auto py-3 flex-col gap-2"
+          className="bg-white/40 border-harmony-400 text-harmony-800 hover:bg-harmony-100 hover:border-harmony-500 h-auto py-3 flex-col gap-2 font-semibold"
         >
           <BookOpen className="w-5 h-5" />
           <span className="text-xs">Lecture du jour</span>
@@ -70,7 +86,7 @@ const QuickActions: React.FC<QuickActionsProps> = ({
         <Button
           onClick={onShare}
           variant="outline"
-          className="bg-white/20 border-serenity-300 text-serenity-700 hover:bg-serenity-50 h-auto py-3 flex-col gap-2"
+          className="bg-white/40 border-serenity-400 text-serenity-800 hover:bg-serenity-100 hover:border-serenity-500 h-auto py-3 flex-col gap-2 font-semibold"
         >
           <Share2 className="w-5 h-5" />
           <span className="text-xs">Partager</span>
@@ -81,7 +97,7 @@ const QuickActions: React.FC<QuickActionsProps> = ({
       {window.deferredPrompt && (
         <Button
           onClick={installPWA}
-          className="w-full mt-3 bg-prayer-gradient text-white hover:opacity-90"
+          className="w-full mt-3 bg-prayer-gradient text-white hover:opacity-90 font-semibold"
         >
           <Download className="w-4 h-4 mr-2" />
           Installer l'application

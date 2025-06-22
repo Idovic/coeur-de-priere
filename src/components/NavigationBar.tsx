@@ -16,21 +16,21 @@ const NavigationBar: React.FC<NavigationBarProps> = ({ activeTab, onTabChange })
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-t border-white/20 shadow-lg">
+    <nav className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-r from-prayer-600/95 to-mystic-600/95 backdrop-blur-xl border-t border-white/30 shadow-2xl">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-around py-2">
           {tabs.map(({ id, icon: Icon, label }) => (
             <button
               key={id}
               onClick={() => onTabChange(id)}
-              className={`flex flex-col items-center justify-center px-3 py-2 rounded-lg transition-all duration-200 min-h-[60px] ${
+              className={`flex flex-col items-center justify-center px-4 py-3 rounded-2xl transition-all duration-300 min-h-[70px] ${
                 activeTab === id
-                  ? 'text-prayer-600 bg-prayer-50'
-                  : 'text-serenity-600 hover:text-prayer-500 hover:bg-prayer-25'
+                  ? 'text-white bg-white/25 shadow-lg scale-105 border-2 border-white/40'
+                  : 'text-white/70 hover:text-white hover:bg-white/15 hover:scale-102'
               }`}
             >
-              <Icon className="w-5 h-5 mb-1" />
-              <span className="text-xs font-medium">{label}</span>
+              <Icon className="w-6 h-6 mb-1" />
+              <span className="text-xs font-semibold">{label}</span>
             </button>
           ))}
         </div>

@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { prayerTopics } from '../data/prayers';
 import { themes } from '../data/themes';
@@ -112,10 +113,32 @@ const Index = () => {
     }
   };
 
-  // Verify that all 110 prayers are loaded with detailed logging
+  // Enhanced prayer count verification
+  console.log(`=== PRAYER COUNT VERIFICATION ===`);
   console.log(`Total prayers loaded: ${prayers.length}`);
+  console.log(`Expected: 110 prayers`);
   console.log(`Prayer IDs range: ${Math.min(...prayers.map(p => p.id))} to ${Math.max(...prayers.map(p => p.id))}`);
   console.log(`Prayer 110 exists:`, prayers.find(p => p.id === 110) ? 'Yes' : 'No');
+  console.log(`Prayer 1 exists:`, prayers.find(p => p.id === 1) ? 'Yes' : 'No');
+  
+  // Check for duplicates
+  const ids = prayers.map(p => p.id);
+  const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
+  if (duplicates.length > 0) {
+    console.log(`Duplicate IDs found:`, duplicates);
+  }
+  
+  // Check for missing IDs
+  const missingIds = [];
+  for (let i = 1; i <= 110; i++) {
+    if (!prayers.find(p => p.id === i)) {
+      missingIds.push(i);
+    }
+  }
+  if (missingIds.length > 0) {
+    console.log(`Missing IDs:`, missingIds);
+  }
+  console.log(`=== END VERIFICATION ===`);
 
   if (showSplash) {
     return <SplashScreen onComplete={handleSplashComplete} />;
@@ -132,12 +155,12 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-prayer-50 via-harmony-50 to-mystic-50 relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-prayer-100 via-harmony-100 to-mystic-100 relative overflow-hidden">
       {/* Éléments décoratifs de fond */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-prayer-300/20 rounded-full blur-3xl animate-float"></div>
-        <div className="absolute bottom-32 right-10 w-96 h-96 bg-mystic-300/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-harmony-300/15 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-prayer-400/30 rounded-full blur-3xl animate-float"></div>
+        <div className="absolute bottom-32 right-10 w-96 h-96 bg-mystic-400/30 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-harmony-400/25 rounded-full blur-3xl animate-float" style={{ animationDelay: '4s' }}></div>
       </div>
 
       <div className="container mx-auto px-4 py-6 pb-24 max-w-6xl relative z-10">
@@ -155,11 +178,11 @@ const Index = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-gradient mb-3 font-nunito">
             Cœur de Prière
           </h1>
-          <p className="text-serenity-600 text-xl font-medium mb-2 font-inter">
+          <p className="text-prayer-800 text-xl font-medium mb-2 font-inter">
             Votre compagnon spirituel au quotidien
           </p>
-          <p className="text-serenity-500 text-sm font-inter max-w-md mx-auto">
-            Découvrez 110 prières organisées par thèmes pour enrichir votre relation avec Dieu
+          <p className="text-prayer-700 text-sm font-inter max-w-md mx-auto">
+            Découvrez {prayers.length} prières organisées par thèmes pour enrichir votre relation avec Dieu
           </p>
         </div>
 
@@ -175,6 +198,7 @@ const Index = () => {
                   onFavorites={() => setViewMode('list')}
                   onDailyReading={handleRandomPrayer}
                   onShare={handleShare}
+                  prayers={prayers}
                 />
               </div>
               <PrayerStreak />
@@ -184,10 +208,10 @@ const Index = () => {
             {viewMode === 'themes' && (
               <>
                 <div className="text-center mb-8">
-                  <h2 className="text-2xl font-bold text-prayer-800 mb-4 font-nunito">
-                    Explorez par Thématiques Spirituelles
+                  <h2 className="text-2xl font-bold text-prayer-900 mb-4 font-nunito">
+                    Découvrez nos Thématiques Spirituelles
                   </h2>
-                  <p className="text-serenity-600 font-inter max-w-2xl mx-auto">
+                  <p className="text-prayer-700 font-inter max-w-2xl mx-auto">
                     Chaque thème contient des prières soigneusement sélectionnées pour vous accompagner 
                     dans vos différents besoins spirituels et moments de vie
                   </p>
@@ -216,31 +240,31 @@ const Index = () => {
                 </div>
 
                 {/* Enhanced statistics */}
-                <Card className="glass-card border-white/30 animate-fade-in">
+                <Card className="glass-card border-white/40 bg-white/60 backdrop-blur-xl animate-fade-in shadow-xl">
                   <div className="p-6 text-center">
                     <div className="flex items-center justify-center gap-2 mb-4">
-                      <Sparkles className="w-5 h-5 text-prayer-500" />
-                      <h3 className="text-lg font-semibold text-prayer-800 font-nunito">Votre Parcours Spirituel</h3>
+                      <Sparkles className="w-5 h-5 text-prayer-600" />
+                      <h3 className="text-lg font-semibold text-prayer-900 font-nunito">Votre Parcours Spirituel</h3>
                     </div>
                     
                     <div className="grid grid-cols-3 gap-6">
                       <div>
-                        <div className="text-2xl font-bold text-prayer-600 mb-1">
+                        <div className="text-2xl font-bold text-prayer-700 mb-1">
                           {prayers.filter(p => p.isCompleted).length}
                         </div>
-                        <div className="text-sm text-serenity-600">Prières explorées</div>
+                        <div className="text-sm text-prayer-600">Prières explorées</div>
                       </div>
                       <div>
-                        <div className="text-2xl font-bold text-mystic-600 mb-1">
+                        <div className="text-2xl font-bold text-mystic-700 mb-1">
                           {prayers.reduce((sum, p) => sum + p.readCount, 0)}
                         </div>
-                        <div className="text-sm text-serenity-600">Moments de prière</div>
+                        <div className="text-sm text-prayer-600">Moments de prière</div>
                       </div>
                       <div>
-                        <div className="text-2xl font-bold text-harmony-600 mb-1">
+                        <div className="text-2xl font-bold text-harmony-700 mb-1">
                           {themes.length}
                         </div>
-                        <div className="text-sm text-serenity-600">Thématiques</div>
+                        <div className="text-sm text-prayer-600">Thématiques</div>
                       </div>
                     </div>
                   </div>
@@ -254,28 +278,28 @@ const Index = () => {
                 <div className="flex items-center justify-between mb-6">
                   <button
                     onClick={backToThemes}
-                    className="btn-glass text-prayer-700 hover:text-prayer-800"
+                    className="btn-glass text-prayer-800 hover:text-prayer-900 bg-white/50 border border-white/40"
                   >
                     ← Retour aux thématiques
                   </button>
                   
                   {selectedTheme && (
-                    <Badge className="bg-prayer-gradient text-white">
+                    <Badge className="bg-prayer-gradient text-white border-white/40">
                       {themes.find(t => t.category === selectedTheme)?.title}
                     </Badge>
                   )}
                 </div>
 
                 {/* Barre de recherche simplifiée */}
-                <Card className="glass-card border-white/30">
+                <Card className="glass-card border-white/40 bg-white/60 backdrop-blur-xl shadow-lg">
                   <div className="p-4">
                     <div className="relative">
-                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-serenity-500" />
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-prayer-600" />
                       <Input
                         placeholder="Rechercher dans cette thématique..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="pl-10 bg-white/40 border-white/50 focus:border-prayer-300 focus:ring-prayer-200 rounded-xl"
+                        className="pl-10 bg-white/60 border-white/60 focus:border-prayer-400 focus:ring-prayer-300 rounded-xl text-prayer-800"
                       />
                     </div>
                   </div>
@@ -298,14 +322,14 @@ const Index = () => {
                 </div>
 
                 {filteredPrayers.length === 0 && (
-                  <Card className="glass-card border-white/30 text-center py-16">
+                  <Card className="glass-card border-white/40 bg-white/60 backdrop-blur-xl text-center py-16 shadow-lg">
                     <div className="floating mb-6">
                       <span className="text-6xl opacity-50">🔍</span>
                     </div>
-                    <h3 className="text-xl font-semibold text-prayer-800 mb-3 font-nunito">
+                    <h3 className="text-xl font-semibold text-prayer-900 mb-3 font-nunito">
                       Aucune prière trouvée
                     </h3>
-                    <p className="text-serenity-600 max-w-md mx-auto font-inter">
+                    <p className="text-prayer-700 max-w-md mx-auto font-inter">
                       Essayez avec d'autres mots-clés ou retournez aux thématiques
                     </p>
                   </Card>
