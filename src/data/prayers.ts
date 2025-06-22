@@ -1,4 +1,3 @@
-
 import { PrayerTopic } from '../types/prayer';
 
 export const prayerTopics: PrayerTopic[] = [
@@ -121,6 +120,206 @@ Je proclame Ta paix sur notre foyer, et je Te remercie de veiller sur nous jour 
     category: 'protection',
     isCompleted: false,
     readCount: 0
+  },
+  {
+    id: 11,
+    title: "Demander l'unité et l'amour dans le couple",
+    content: `Père céleste, Toi qui es la source de tout vrai amour, je viens devant Toi pour mon couple. Seigneur, là où il y a des incompréhensions, des blessures ou de la distance, viens réconcilier nos cœurs. Tu as écrit dans l'Ecclésiaste 4:12 : « Et si quelqu'un est plus fort qu'un seul, les deux peuvent lui résister ; et la corde à trois fils ne se rompt pas facilement. » Je veux, Seigneur, que Tu sois la troisième corde, le centre et la force de notre union.
+
+Ta Parole déclare aussi dans 1 Corinthiens 13:4-7 : « L'amour est patient, il est plein de bonté, l'amour n'est point envieux, l'amour ne se vante point… il excuse tout, il croit tout, il espère tout, il supporte tout. » Mets ainsi cet amour surnaturel dans notre relation ! Purifie-nous de l'égoïsme, du ressentiment, du passé non réglé, et apprends-nous à pardonner rapidement comme Tu nous as pardonnés. Que notre foyer soit un témoignage de Ta fidélité ; je proclame que, dans le nom de Jésus, rien ne pourra séparer ce que Toi, Seigneur, Tu as uni. Amen.`,
+    category: 'famille',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 12,
+    title: "Prier pour la conversion des membres non-croyants de la famille",
+    content: `Dieu d'amour et de miséricorde, je porte devant Toi chacun de mes proches qui ne Te connaissent pas encore. Tu as dit dans Actes 16:31 : « Crois au Seigneur Jésus, et tu seras sauvé, toi et ta famille. » Je m'accroche à cette promesse, Seigneur, et je proclame la délivrance, la révélation et le salut sur chaque âme de ma maison.
+
+Il est écrit dans 2 Pierre 3:9 : « Le Seigneur ne tarde pas dans l'accomplissement de la promesse… mais il use de patience envers vous, ne voulant pas qu'aucun périsse, mais que tous arrivent à la repentance. » Que Ton Esprit visite mes proches, touche leurs cœurs, les convainque de péché, de justice et de jugement. Accorde-leur le don de la foi, enlève les voiles de l'incrédulité, brise les chaînes de l'ennemi. J'appelle la lumière de Ta vérité dans leur vie et proclame leur destinée en Jésus. Merci parce que rien n'est impossible à Toi, ô Dieu de miracles. Amen.`,
+    category: 'famille',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 13,
+    title: "Demander la guérison des maladies physiques ou émotionnelles",
+    content: `Seigneur Jésus, Toi qui as pris nos souffrances et porté nos maladies sur la croix, je viens maintenant plaider Ta miséricorde pour la guérison. Ta Parole déclare dans Ésaïe 53:5 : « …c'est par ses meurtrissures que nous sommes guéris. » Je déclare, Seigneur, que Ta puissance agit maintenant sur chaque cellule, chaque émotion, chaque blessure cachée.
+
+Tu as aussi promis dans Psaume 103:2-3 : « Mon âme, bénis l'Éternel… c'est lui qui pardonne toutes tes iniquités, qui guérit toutes tes maladies. » Que Ta grâce restaure entièrement mon corps, mon esprit, ma mémoire et mon cœur ! Je rejette la maladie et la faiblesse, et j'accueille la vie de Dieu en moi. Que Ton nom soit glorifié à travers ma restauration. Par la foi, je reçois la guérison et la paix. Je te rends grâce, Seigneur, car Tu es le Dieu qui guérit encore aujourd'hui. Amen.`,
+    category: 'protection',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 14,
+    title: "Prier pour la paix intérieure en période d'anxiété ou de stress",
+    content: `Mon Dieu, Toi qui es le Prince de la paix, j'apporte à Tes pieds toute inquiétude et tout tourment que je ressens. Ta Parole me rassure dans Philippiens 4:6-7 : « Ne vous inquiétez de rien, mais en toute chose faites connaître vos besoins à Dieu… et la paix de Dieu, qui surpasse toute intelligence, gardera vos cœurs et vos pensées en Jésus-Christ. » Seigneur, déverse maintenant sur moi cette paix surnaturelle.
+
+Il est aussi écrit dans Jean 14:27 : « Je vous laisse la paix, je vous donne ma paix. Je ne vous donne pas comme le monde donne. Que votre cœur ne se trouble point et ne s'alarme point. » Je refuse l'esprit de crainte et je reçois Ton repos. Calme les tempêtes en moi, donne-moi de Te faire confiance quelles que soient les circonstances. Je proclame, au nom de Jésus, que la paix est mon partage aujourd'hui et chaque jour. Merci de garder mon esprit en parfaite sérénité. Amen.`,
+    category: 'paix',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 15,
+    title: "Demander la victoire sur la tentation et le péché",
+    content: `Seigneur, Tu connais mes combats cachés et mes luttes personnelles. Ta Parole déclare dans 1 Corinthiens 10:13 : « Aucune tentation ne vous est survenue qui n'ait été humaine ; et Dieu, qui est fidèle, ne permettra pas que vous soyez tentés au-delà de vos forces. » Je proclame Ta fidélité sur ma vie face à l'épreuve.
+
+Il est aussi écrit dans Galates 5:16 : « Marchez selon l'Esprit, et vous n'accomplirez pas les désirs de la chair. » Remplis-moi de la force et de la sensibilité à Ta voix ; que la puissance du Saint-Esprit règne sur mes désirs et mes pensées. Je déclare la victoire du sang de Jésus sur toute attaque de l'ennemi, tout schéma destructeur, toute faiblesse de la chair. Merci pour le chemin de la liberté ; je choisis d'obéir et de marcher dans la pureté que Tu offres. Garde-moi près de Toi chaque jour, dans le nom de Jésus-Christ. Amen.`,
+    category: 'foi',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 16,
+    title: "Prier pour la délivrance des mauvaises habitudes",
+    content: `Ô Dieu libérateur, Toi qui brises les chaînes et détruis les forteresses, me voici devant Toi avec mes mauvais penchants et mes routines qui m'éloignent de Toi. Ta Parole déclare dans Jean 8:36 : « Si donc le Fils vous affranchit, vous serez réellement libres. » Je proclame cette liberté en Christ sur chaque domaine de ma vie.
+
+Il est écrit dans 2 Corinthiens 5:17 : « Si quelqu'un est en Christ, il est une nouvelle créature. Les choses anciennes sont passées ; voici, toutes choses sont devenues nouvelles. » Je brise, au nom de Jésus, l'emprise de tous les automatismes négatifs, toute addiction, toute habitude indigne. Je reçois un esprit renouvelé et discipliné, selon Ta volonté. Merci de me façonner à Ton image, de me rendre victorieux et de me donner la grâce d'une vie transformée pour Ta gloire. Amen.`,
+    category: 'foi',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 17,
+    title: "Demander la direction du Saint-Esprit à chaque instant",
+    content: `Saint-Esprit, Conseiller fidèle et doux, je viens m'abandonner à Ta guidance pour cette journée et toutes celles à venir. Il est écrit dans Romains 8:14 : « Car tous ceux qui sont conduits par l'Esprit de Dieu sont fils de Dieu. » Je désire vivre pleinement comme Ton enfant, à l'écoute de Tes instructions.
+
+Ta Parole dit dans Proverbes 3:6 : « Reconnais-le dans toutes tes voies, et il aplanira tes sentiers. » Je refuse de m'appuyer sur ma sagesse humaine. Guide mes pas, mes paroles, mes choix et mes relations. Fais-moi éviter le piège de l'ennemi et marcher dans la paix et la lumière. Mets en moi le désir de consulter Ta voix en toute chose. Je déclare que Tes conseils me gardent et m'accompagnent chaque heure. Gloire à Toi pour Ta bienveillance, Amour immense et direction parfaite. Amen.`,
+    category: 'direction',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 18,
+    title: "Prier pour être un témoin fidèle de la foi auprès des autres",
+    content: `Seigneur Jésus, je confesse que sans Toi, je ne peux rien, mais avec Toi je puis porter du fruit qui demeure. Ta Parole dit dans Matthieu 5:16 : « Que votre lumière luise ainsi devant les hommes, afin qu'ils voient vos bonnes œuvres, et qu'ils glorifient votre Père qui est dans les cieux. » Je veux que ma vie soit un témoignage puissant de Ton amour.
+
+Il est aussi écrit dans Actes 1:8 : « …Vous recevrez une puissance, le Saint-Esprit survenant sur vous, et vous serez mes témoins… jusqu'aux extrémités de la terre. » Fortifie ma voix, Seigneur, ouvre des portes pour que j'annonce l'Évangile avec assurance ; que mes actes et mes paroles parlent plus fort que ce monde. Je déclare que je suis une lumière et un sel pour mon entourage, guidé et soutenu par le Saint-Esprit. Utilise-moi, Seigneur, pour toucher ceux qui sont dans les ténèbres et amener beaucoup à Ta lumière. Amen.`,
+    category: 'amour',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 19,
+    title: "Demander l'audace de partager l'Évangile",
+    content: `Dieu vivant, Tu as commandé à Tes enfants d'aller et de faire de toutes les nations des disciples. Ta Parole déclare dans Romains 1:16 : « Car je n'ai point honte de l'Évangile : c'est une puissance de Dieu pour le salut de quiconque croit… » Seigneur, remplis-moi de cette audace qui vient d'En Haut.
+
+Il est écrit dans 2 Timothée 1:7 : « Car ce n'est pas un esprit de timidité que Dieu nous a donné, mais un esprit de force, d'amour et de sagesse. » Je repousse toute crainte, toute gêne, tout embarras. Accorde-moi des occasions, des mots inspirés, et le discernement pour saisir le moment favorable. Que mon témoignage soit fidèle à Ta vérité et à Ta grâce. Je déclare que partout où j'irai, je porterai la bonne nouvelle avec foi, sagesse et amour, et que des vies seront transformées par Ta main. Amen.`,
+    category: 'amour',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 20,
+    title: "Prier pour la croissance et la santé spirituelle de l'église locale",
+    content: `Seigneur Dieu, Chef de l'Église et Berger suprême, je viens Te présenter ma communauté. Tu as promis dans Matthieu 16:18 : « …Je bâtirai mon Église, et les portes du séjour des morts ne prévaudront point contre elle. » Viens, Seigneur, fortifie, unis et fais croître spirituellement chaque membre de l'assemblée.
+
+Il est écrit dans Éphésiens 4:16 : « C'est de lui [Christ], et grâce à tous les liens qui l'assistent, que tout le corps bien coordonné et formant un solide assemblage tire sa croissance… dans l'amour. » Que Ton amour soit la base de notre unité, de notre pardon, de notre service. Purifie l'église de toute division, relève les faibles, encourage les serviteurs, renouvelle le zèle pour les perdus. Fais de notre communauté un phare pour la région, un refuge pour les affligés, une famille pour les solitaires, une maison de Ta sainteté. Que Ta gloire remplisse l'église et fasse jaillir la vie en abondance. Au nom de Jésus-Christ, Amen.`,
+    category: 'famille',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 21,
+    title: "Prier pour bénir et fortifier les pasteurs et les leaders",
+    content: `Seigneur Dieu, je viens humblement devant Toi pour présenter tous ceux qui servent l'église : les pasteurs, les anciens, les responsables et tous les ministères que Tu as suscités. Ta Parole déclare dans Hébreux 13:17 : « Obéissez à vos conducteurs et ayez pour eux de la déférence, car ils veillent sur vos âmes comme devant en rendre compte. » Je reconnais, Seigneur, le poids et la responsabilité qui pèsent sur eux. Viens renouveler leurs forces, Seigneur ! Bénis-les dans leur service, dans leur vie familiale, dans leur santé, dans leur marche quotidienne avec Toi.
+
+Il est écrit dans Ésaïe 40:31 : « Mais ceux qui se confient en l'Éternel renouvellent leur force. Ils prennent le vol comme les aigles ; ils courent, et ne se lass:ent point, ils marchent, et ne se fatiguent point. » Révèle Ta fidélité à chacun d'eux, protège-les des critiques injustes, des découragements et de l'épuisement. Accorde-leur la sagesse d'en haut, une vision renouvelée et un cœur toujours passionné pour Toi. Que leur zèle soit contagieux, et leur vie un témoignage vivant de Ta puissance. Merci parce que Tu es leur bouclier, leur ami fidèle et leur soutien inaltérable. Au nom de Jésus, Amen.`,
+    category: 'famille',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 22,
+    title: "Prier pour l'unité entre les membres de l'église",
+    content: `Père céleste, Toi qui es le Dieu de l'unité et de la paix, j'élève vers Toi mon église locale : que ton Esprit souffle un vent d'unité profonde entre tous les frères et sœurs. Ta Parole déclare dans Jean 17:21 : « …afin que tous soient un, comme toi, Père, tu es en moi et comme je suis en toi, afin qu'eux aussi soient un en nous, pour que le monde croie que tu m'as envoyé. » Je prie pour que disparaissent la division, la jalousie et l'incompréhension.
+
+Il est écrit dans Psaume 133:1 : « Voici, oh ! qu'il est agréable, qu'il est doux pour des frères de demeurer ensemble. » Donne-nous de rechercher la paix, le pardon et la réconciliation, même là où il y a eu blessure ou conflit. Que Ton amour soit notre lien parfait, que Ton pardon circule de cœur à cœur, et que la communion fraternelle devienne un témoignage irrésistible pour le monde. Merci pour cette famille spirituelle ; garde-nous unis dans la foi, dans l'espérance et dans l'amour, par Christ notre Seigneur. Amen.`,
+    category: 'famille',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 23,
+    title: "Prier pour que l'église soit un lieu d'amour et d'accueil",
+    content: `Seigneur Jésus, Toi qui as dit : « A ceci tous reconnaîtront que vous êtes mes disciples, si vous avez de l'amour les uns pour les autres » (Jean 13:35), fais de notre église un vrai foyer d'amour inconditionnel. Mets en nous ton esprit d'accueil et de bienveillance, afin qu'aucun homme, aucune femme, aucun enfant entrant dans l'église ne se sente délaissé ou jugé, mais aimé comme Tu l'aimes.
+
+Il est écrit dans Romains 15:7 : « Accueillez-vous donc les uns les autres, comme Christ vous a accueillis, pour la gloire de Dieu. » Que l'église ne soit ni un club fermé ni un cercle exclusif, mais une maison ouverte où la grâce rayonne. Apprends-nous à dépasser les préjugés et à voir chaque personne avec Ton regard : celui de la miséricorde. Fais tomber nos barrières, rallume la flamme pour le service et la prière pour tous. Que Ta gloire repose sur une communauté passionnée d'amour et d'hospitalité. Merci pour cette vision, Seigneur, au nom de Jésus. Amen.`,
+    category: 'amour',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 24,
+    title: "Prier pour la persévérance dans la prière et la lecture de la Bible",
+    content: `Mon Père, Tu sais combien nos cœurs sont parfois fatigués, distraits ou surchargés. Mais Ta Parole déclare dans 1 Thessaloniciens 5:17 : « Priez sans cesse. » Donne-moi, Seigneur, une discipline constante pour être fidèle dans la prière, pour ne jamais lâcher la main de Dieu, même dans l'épreuve ou en saison sèche.
+
+Il est écrit dans Josué 1:8 : « Que ce livre de la loi ne s'éloigne pas de ta bouche ; médite-le jour et nuit, pour agir fidèlement selon tout ce qui y est écrit. Car c'est alors que tu auras du succès dans tes entreprises, c'est alors que tu réussiras. » Je veux, par Ta grâce, développer cette habitude de la méditation quotidienne, même lorsque je ne ressens rien, car Ta Parole porte du fruit en son temps. Je déclare que ma vie de prière s'affermit jour après jour, que la soif de Ta présence et de Tes Écritures s'accroît chaque jour davantage. Merci pour Ta fidélité qui me soutient et Te rend digne de confiance. Au nom de Jésus, Amen.`,
+    category: 'foi',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 25,
+    title: "Prier pour comprendre et pratiquer la Parole",
+    content: `Seigneur, Ton Écriture est vivante, transformante, mais combien de fois je la lis sans la comprendre pleinement ou sans l'appliquer ! Il est écrit dans Jacques 1:22 : « Mettez en pratique la Parole, et ne vous bornez pas à l'écouter, en vous trompant vous-mêmes par de faux raisonnements. » Je Te demande la révélation de Tes Écritures, la compréhension de Tes commandements et la force de les pratiquer chaque jour.
+
+Ta Parole déclare dans Psaume 119:18 : « Ouvre mes yeux, pour que je contemple les merveilles de ta loi. » Ouvre mon intelligence, ô Esprit de vérité, afin que je devienne un disciple authentique, pétri par Ta Parole dans mes paroles, mes gestes et mes choix. Donne-moi l'obéissance, non par contrainte, mais dans la joie de Te plaire. Je veux que Ta Parole façonne mon caractère, influence mes décisions et resplendisse dans ma vie, pour la gloire de Ton nom. Amen.`,
+    category: 'sagesse',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 26,
+    title: "Prier pour la joie au milieu des épreuves",
+    content: `Seigneur, dans la détresse et la difficulté, mon premier réflexe est souvent la plainte ou la peur. Mais il est écrit dans Jacques 1:2-3 : « Mes frères, regardez comme un sujet de joie complète les diverses épreuves auxquelles vous pouvez être exposés, sachant que l'épreuve de votre foi produit la patience. » Père, donne-moi ce recul spirituel, cette force profonde qui transforme chaque saison difficile en opportunité pour grandir et me rapprocher de Toi.
+
+Ta Parole déclare dans Philippiens 4:4 : « Réjouissez-vous toujours dans le Seigneur ; je le répète, réjouissez-vous. » Donne-moi la capacité de reconnaître Ta main au milieu de mes combats, de discerner les bénédictions cachées dans la souffrance, et de Te louer à tout moment. Je déclare que ma joie ne dépend plus de mes circonstances, mais de ma relation avec Toi, source inépuisable de paix et de réjouissance. Merci pour la force et la joie du Seigneur, qui sont ma victoire. Amen.`,
+    category: 'paix',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 27,
+    title: "Demander l'humilité et un cœur enseignable",
+    content: `Seigneur tout-puissant, Tu connais mon cœur et mes faiblesses. Donne-moi un esprit d'humilité sincère, car il est écrit dans Jacques 4:6 : « Dieu résiste aux orgueilleux, mais il fait grâce aux humbles. » Je veux marcher chaque jour dans cette humilité, reconnaissant que je dépends de Toi en toute chose.
+
+Dans Psaume 25:9, il est écrit : « Il conduit les humbles dans la justice, il enseigne aux humbles sa voie. » Fais de moi une personne enseignable, ouverte à la correction, capable d'écouter, de reconnaître mes torts et de grandir. Brise en moi toute prétention ou tout esprit de supériorité. Que mon seul orgueil soit de Te connaître et de Te ressembler de plus en plus. Merci de forger en moi un caractère à l'image de Jésus, doux et humble de cœur. Amen.`,
+    category: 'sagesse',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 28,
+    title: "Prier pour la protection des enfants et des jeunes",
+    content: `Père, Tu es Celui qui protège et garde tous Tes enfants. Je Te remets la vie des enfants et des jeunes que Tu m'as confiés ou qui m'entourent. Ta Parole déclare dans Psaume 121:7-8 : « L'Éternel te gardera de tout mal, il gardera ton âme ; l'Éternel gardera ton départ et ton arrivée, dès maintenant et à jamais. » Je proclame cette promesse sur leur vie.
+
+Il est écrit dans Proverbes 22:6 : « Instruis l'enfant selon la voie qu'il doit suivre ; et quand il sera vieux, il ne s'en détournera pas. » Seigneur, entoure-les de Tes anges, garde-les du mal, de la corruption du siècle, des mauvaises influences et des dangers de notre temps. Remplis-les de sagesse, de force et de discernement, et attire-les chaque jour plus près de Ton cœur. Merci de veiller sur eux, d'établir Tes plans dans leur vie et de les garder dans Ta main. Amen.`,
+    category: 'protection',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 29,
+    title: "Prier pour encourager les découragés",
+    content: `Seigneur de compassion, Tu es Celui qui relève ceux qui chancellent et redonne la vigueur à celui qui est abattu. Ta Parole déclare dans Ésaïe 40:29 : « Il donne de la force à celui qui est fatigué, et il augmente la vigueur de celui qui tombe en défaillance. » Merci, Seigneur, car Tu connais chaque larme, chaque lassitude, chaque découragement de Tes enfants.
+
+Dans 2 Corinthiens 1:4, il est écrit : « Il nous console dans toutes nos afflictions, afin que, par la consolation dont nous sommes l'objet de la part de Dieu, nous puissions consoler ceux qui se trouvent dans quelque affliction ! » Utilise-moi pour apporter une parole qui relève, un geste d'affection, une présence réconfortante à ceux qui traversent la vallée de l'ombre. Que Ton onction me rende sensible, disponible, et inspiré pour fortifier ceux autour de moi. Merci parce que Tu es le Dieu de tout réconfort. Amen.`,
+    category: 'amour',
+    isCompleted: false,
+    readCount: 0
+  },
+  {
+    id: 30,
+    title: "Prier pour la provision matérielle et financière",
+    content: `Seigneur, Toi qui es Jéhovah Jireh, le Dieu qui pourvoit à tous nos besoins, je viens déposer devant Toi mes manques, mes dettes, mes préoccupations financières. Ta Parole déclare dans Philippiens 4:19 : « Et mon Dieu pourvoira à tous vos besoins selon sa richesse, avec gloire, en Jésus-Christ. » Je proclame cette promesse aujourd'hui sur ma vie et sur ceux de ma maison.
+
+Il est écrit dans Psaume 34:10 : « Ceux qui cherchent l'Éternel ne sont privés d'aucun bien. » Donne-moi la sagesse pour gérer ce que Tu me confies, l'intelligence pour établir des priorités, et l'humilité pour demander et accepter l'aide quand il le faut. Ouvre les portes des opportunités, brise les chaînes de la pauvreté et du manque, accorde l'abondance pour que je sois aussi une source de bénédiction pour d'autres. Je déclare la liberté et la richesse divine sur ma vie, selon Ta volonté. Merci de veiller fidèlement sur chacun de mes besoins. Amen.`,
+    category: 'protection',
+    isCompleted: false,
+    readCount: 0
   }
 ];
 
@@ -132,7 +331,8 @@ export const categoryLabels = {
   pardon: 'Pardon & Réconciliation',
   reconnaissance: 'Gratitude & Louange',
   protection: 'Protection Divine',
-  direction: 'Direction & Volonté'
+  direction: 'Direction & Volonté',
+  paix: 'Paix Intérieure'
 };
 
 export const categoryColors = {
@@ -143,5 +343,6 @@ export const categoryColors = {
   pardon: 'emerald-500',
   reconnaissance: 'orange-500',
   protection: 'blue-500',
-  direction: 'purple-500'
+  direction: 'purple-500',
+  paix: 'cyan-500'
 };

@@ -1,4 +1,3 @@
-
 export interface PrayerTopic {
   id: number;
   title: string;
@@ -17,7 +16,8 @@ export type PrayerCategory =
   | 'pardon'
   | 'reconnaissance'
   | 'protection'
-  | 'direction';
+  | 'direction'
+  | 'paix';
 
 export interface UserStats {
   totalPrayers: number;
