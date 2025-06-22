@@ -1,3 +1,4 @@
+
 export interface PrayerTopic {
   id: number;
   title: string;
@@ -17,7 +18,15 @@ export type PrayerCategory =
   | 'reconnaissance'
   | 'protection'
   | 'direction'
-  | 'paix';
+  | 'paix'
+  | 'healing-comfort'
+  | 'wisdom-guidance'
+  | 'family-relationship'
+  | 'protection-deliverance'
+  | 'spiritual-growth'
+  | 'church-community'
+  | 'provision-blessing'
+  | 'societal-global';
 
 export interface UserStats {
   totalPrayers: number;

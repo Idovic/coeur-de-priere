@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { PrayerTopic } from '../types/prayer';
-import { categoryColors } from '../data/prayers';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
 import { Check, Heart } from 'lucide-react';
@@ -13,7 +12,26 @@ interface PrayerCardProps {
 
 const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick }) => {
   const getCategoryColor = (category: string) => {
-    return categoryColors[category as keyof typeof categoryColors] || 'prayer-500';
+    const categoryColors: Record<string, string> = {
+      'foi': 'prayer-500',
+      'famille': 'mystic-500',
+      'sagesse': 'harmony-500',
+      'amour': 'serenity-500',
+      'pardon': 'prayer-500',
+      'reconnaissance': 'mystic-500',
+      'protection': 'harmony-500',
+      'direction': 'serenity-500',
+      'paix': 'prayer-500',
+      'healing-comfort': 'emerald-500',
+      'wisdom-guidance': 'blue-500',
+      'family-relationship': 'rose-500',
+      'protection-deliverance': 'purple-500',
+      'spiritual-growth': 'green-500',
+      'church-community': 'orange-500',
+      'provision-blessing': 'yellow-500',
+      'societal-global': 'indigo-500'
+    };
+    return categoryColors[category] || 'prayer-500';
   };
 
   return (
