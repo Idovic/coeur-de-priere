@@ -58,6 +58,43 @@ const Index = () => {
     return matchesSearch && matchesTheme;
   });
 
+  // DIAGNOSTIC DÉTAILLÉ - Logs de débogage complets
+  console.log(`=== DIAGNOSTIC COMPLET DU RENDU DES PRIÈRES ===`);
+  console.log(`1. Données sources:`);
+  console.log(`   - allPrayers.length: ${allPrayers.length}`);
+  console.log(`   - prayersList.length: ${prayersList.length}`);
+  console.log(`   - IDs min/max: ${Math.min(...prayersList.map(p => p.id))} à ${Math.max(...prayersList.map(p => p.id))}`);
+  
+  console.log(`2. État du filtrage:`);
+  console.log(`   - searchTerm: "${searchTerm}"`);
+  console.log(`   - selectedTheme: ${selectedTheme}`);
+  console.log(`   - viewMode: ${viewMode}`);
+  console.log(`   - filteredPrayers.length: ${filteredPrayers.length}`);
+  
+  console.log(`3. Analyse des prières filtrées:`);
+  if (filteredPrayers.length > 0) {
+    console.log(`   - Première prière ID: ${filteredPrayers[0].id}`);
+    console.log(`   - Dernière prière ID: ${filteredPrayers[filteredPrayers.length - 1].id}`);
+    console.log(`   - Échantillon des 10 premiers IDs:`, filteredPrayers.slice(0, 10).map(p => p.id));
+    if (filteredPrayers.length > 50) {
+      console.log(`   - IDs 50-60:`, filteredPrayers.slice(50, 60).map(p => p.id));
+    }
+    if (filteredPrayers.length > 100) {
+      console.log(`   - IDs 100-110:`, filteredPrayers.slice(100, 110).map(p => p.id));
+    }
+  }
+  
+  console.log(`4. Vérification par thème:`);
+  themes.forEach(theme => {
+    const themeCount = prayersList.filter(p => p.category === theme.category).length;
+    console.log(`   - ${theme.title} (${theme.category}): ${themeCount} prières`);
+  });
+  
+  console.log(`5. État de rendu:`);
+  console.log(`   - activeTab: ${activeTab}`);
+  console.log(`   - Prières à rendre: ${activeTab === 'prayers' && viewMode === 'list' ? filteredPrayers.length : 'N/A (mode thèmes)'}`);
+  console.log(`=== FIN DU DIAGNOSTIC ===`);
+
   const handlePrayerClick = (prayer: PrayerTopic) => {
     setPrayersList(prev => prev.map(p => 
       p.id === prayer.id 
@@ -80,6 +117,12 @@ const Index = () => {
   };
 
   const handleThemeClick = (themeId: string) => {
+    console.log(`=== SÉLECTION THÈME ===`);
+    console.log(`Thème sélectionné: ${themeId}`);
+    const themePrayers = prayersList.filter(p => p.category === themeId);
+    console.log(`Prières dans ce thème: ${themePrayers.length}`);
+    console.log(`IDs des prières du thème:`, themePrayers.map(p => p.id).sort((a,b) => a-b));
+    
     setSelectedTheme(themeId);
     setViewMode('list');
   };
@@ -112,33 +155,6 @@ const Index = () => {
       navigator.clipboard.writeText(window.location.href);
     }
   };
-
-  // Enhanced prayer count verification
-  console.log(`=== PRAYER COUNT VERIFICATION ===`);
-  console.log(`Total prayers loaded: ${prayersList.length}`);
-  console.log(`Expected: 110 prayers`);
-  console.log(`Prayer IDs range: ${Math.min(...prayersList.map(p => p.id))} to ${Math.max(...prayersList.map(p => p.id))}`);
-  console.log(`Prayer 110 exists:`, prayersList.find(p => p.id === 110) ? 'Yes' : 'No');
-  console.log(`Prayer 1 exists:`, prayersList.find(p => p.id === 1) ? 'Yes' : 'No');
-  
-  // Check for duplicates
-  const ids = prayersList.map(p => p.id);
-  const duplicates = ids.filter((id, index) => ids.indexOf(id) !== index);
-  if (duplicates.length > 0) {
-    console.log(`Duplicate IDs found:`, duplicates);
-  }
-  
-  // Check for missing IDs
-  const missingIds = [];
-  for (let i = 1; i <= 110; i++) {
-    if (!prayersList.find(p => p.id === i)) {
-      missingIds.push(i);
-    }
-  }
-  if (missingIds.length > 0) {
-    console.log(`Missing IDs:`, missingIds);
-  }
-  console.log(`=== END VERIFICATION ===`);
 
   if (showSplash) {
     return <SplashScreen onComplete={handleSplashComplete} />;
@@ -179,7 +195,7 @@ const Index = () => {
             Cœur de Prière
           </h1>
           <p className="text-prayer-800 text-xl font-medium mb-2 font-inter">
-            Votre compagnon spirituel au quotidien
+            Votre compagnon spirituuel au quotidien
           </p>
           <p className="text-prayer-700 text-sm font-inter max-w-md mx-auto">
             Découvrez {prayersList.length} prières organisées par thèmes pour enrichir votre relation avec Dieu
@@ -272,7 +288,7 @@ const Index = () => {
               </>
             )}
 
-            {/* Vue liste filtrée */}
+            {/* Vue liste filtrée - CORRECTION DU RENDU COMPLET */}
             {viewMode === 'list' && (
               <>
                 <div className="flex items-center justify-between mb-6">
@@ -284,9 +300,14 @@ const Index = () => {
                   </button>
                   
                   {selectedTheme && (
-                    <Badge className="bg-prayer-gradient text-white border-white/40">
-                      {themes.find(t => t.category === selectedTheme)?.title}
-                    </Badge>
+                    <div className="flex items-center gap-4">
+                      <Badge className="bg-prayer-gradient text-white border-white/40">
+                        {themes.find(t => t.category === selectedTheme)?.title}
+                      </Badge>
+                      <div className="text-sm text-prayer-700 font-medium">
+                        {filteredPrayers.length} prière{filteredPrayers.length > 1 ? 's' : ''}
+                      </div>
+                    </div>
                   )}
                 </div>
 
@@ -305,20 +326,35 @@ const Index = () => {
                   </div>
                 </Card>
 
-                {/* Liste des prières */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredPrayers.map((prayer, index) => (
-                    <div 
-                      key={prayer.id}
-                      className="animate-fade-in"
-                      style={{ animationDelay: `${index * 100}ms` }}
-                    >
-                      <PrayerCard
-                        prayer={prayer}
-                        onClick={() => handlePrayerClick(prayer)}
-                      />
-                    </div>
-                  ))}
+                {/* CORRECTION CRITIQUE: Rendu sans limitation des prières */}
+                <div className="space-y-4">
+                  <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
+                    <p className="text-sm font-medium text-blue-800">
+                      🔍 Mode débogage: {filteredPrayers.length} prières à afficher
+                    </p>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredPrayers.map((prayer, index) => {
+                      // Log pour chaque prière rendue
+                      if (index < 5 || index > filteredPrayers.length - 6) {
+                        console.log(`Rendu prière ${index + 1}/${filteredPrayers.length}: ID ${prayer.id} - "${prayer.title}"`);
+                      }
+                      
+                      return (
+                        <div 
+                          key={`prayer-${prayer.id}-${index}`}
+                          className="animate-fade-in"
+                          style={{ animationDelay: `${Math.min(index * 50, 2000)}ms` }}
+                        >
+                          <PrayerCard
+                            prayer={prayer}
+                            onClick={() => handlePrayerClick(prayer)}
+                          />
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
 
                 {filteredPrayers.length === 0 && (
