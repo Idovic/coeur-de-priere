@@ -1,5 +1,6 @@
+
 import React, { useState, useEffect } from 'react';
-import { prayers } from '../data/prayers';
+import { allPrayers } from '../data/prayers';
 import { themes } from '../data/themes';
 import PrayerCard from '../components/PrayerCard';
 import PrayerReader from '../components/PrayerReader';
@@ -23,7 +24,7 @@ const Index = () => {
   const [activeTab, setActiveTab] = useState<'prayers' | 'stats' | 'history' | 'settings'>('prayers');
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedTheme, setSelectedTheme] = useState<string | null>(null);
-  const [prayersList, setPrayersList] = useState(prayers);
+  const [prayersList, setPrayersList] = useState(allPrayers);
   const [showSplash, setShowSplash] = useState(true);
   const [viewMode, setViewMode] = useState<'themes' | 'list'>('themes');
   const [showNotificationSettings, setShowNotificationSettings] = useState(false);
