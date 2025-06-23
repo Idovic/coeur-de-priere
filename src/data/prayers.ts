@@ -4,7 +4,7 @@ export const prayers: PrayerTopic[] = [
   {
     id: 1,
     title: "Prier pour la paix intérieure",
-    content: "Seigneur, je Te demande de m'apporter la paix intérieure dans les moments de stress et d'anxiété. Aide-moi à me concentrer sur Ta présence et à trouver du réconfort dans Ta parole.",
+    content: "Seigneur, Toi qui es le Prince de la Paix, je viens à Toi avec un cœur lourd, cherchant Ta paix qui surpasse toute intelligence. Dans Philippiens 4:7, Tu promets que « la paix de Dieu, qui surpasse toute intelligence, gardera nos cœurs et nos pensées en Jésus-Christ. » Je Te demande de calmer les tempêtes intérieures, d'apaiser mes anxiétés et mes préoccupations. Que Ta présence remplisse chaque coin de mon être, chassant toute crainte et tout trouble. Aide-moi à me reposer en Toi, sachant que Tu tiens toutes choses entre Tes mains. Accorde-moi la sérénité d'accepter ce que je ne peux changer, le courage de changer ce que je peux, et la sagesse de distinguer l'un de l'autre. Amen.",
     category: 'paix',
     isCompleted: false,
     readCount: 0
@@ -12,7 +12,7 @@ export const prayers: PrayerTopic[] = [
   {
     id: 2,
     title: "Demander la sagesse",
-    content: "Seigneur, accorde-moi la sagesse dans mes décisions quotidiennes. Que je puisse discerner ce qui est juste et bon selon Ta volonté.",
+    content: "Père céleste, source de toute sagesse, je reconnais que sans Toi, je ne peux rien faire de bon. Ta Parole dit dans Jacques 1:5 : « Si quelqu'un d'entre vous manque de sagesse, qu'il la demande à Dieu, qui donne à tous simplement et sans reproche, et elle lui sera donnée. » Je viens humblement Te demander cette sagesse divine pour naviguer dans les complexités de la vie. Éclaire mon intelligence, guide mes décisions, et aide-moi à voir les situations avec Tes yeux. Que je puisse discerner entre le bien et le mal, choisir ce qui est juste selon Ta volonté. Donne-moi la sagesse dans mes relations, mon travail, mes finances, et dans tous les aspects de ma vie. Que chaque choix que je fais soit aligné sur Tes desseins parfaits. Amen.",
     category: 'sagesse',
     isCompleted: false,
     readCount: 0
@@ -20,7 +20,7 @@ export const prayers: PrayerTopic[] = [
   {
     id: 3,
     title: "Prier pour la guérison",
-    content: "Seigneur, je Te demande de guérir ceux qui souffrent autour de moi. Que Ta main guérisse les malades et apporte réconfort à ceux qui sont dans la douleur.",
+    content: "Seigneur Jésus, Grand Médecin et Guérisseur, je viens à Toi avec foi, sachant que Tu es le même hier, aujourd'hui et éternellement. Ta Parole déclare dans Ésaïe 53:5 : « C'est par ses meurtrissures que nous sommes guéris. » Je Te prie pour tous ceux qui souffrent dans leur corps, leur âme ou leur esprit. Étends Ta main puissante et apporte la guérison là où il y a maladie, la paix là où il y a tourment, et l'espoir là où règne le désespoir. Touche chaque cellule malade, restaure chaque organe défaillant, et renouvelle chaque force épuisée. Console les familles qui veillent au chevet de leurs bien-aimés. Donne sagesse et compassion au personnel médical. Que Ta gloire soit révélée à travers chaque guérison. Amen.",
     category: 'healing-comfort',
     isCompleted: false,
     readCount: 0
@@ -28,7 +28,7 @@ export const prayers: PrayerTopic[] = [
   {
     id: 4,
     title: "Demander la protection",
-    content: "Seigneur, protège ma famille et mes amis. Que Ta présence les entoure et les garde en sécurité dans toutes leurs voies.",
+    content: "Éternel, mon refuge et ma forteresse, je trouve en Toi ma sécurité. Le Psaume 91:11 promet : « Car il ordonnera à ses anges de te garder dans toutes tes voies. » Je Te demande de déployer Ta protection divine sur ma famille et moi. Couvre-nous de Tes ailes, entoure-nous de Tes anges gardiens. Protège-nous des accidents, des maladies, des dangers visibles et invisibles. Garde nos cœurs des tentations, nos esprits des pensées négatives, et nos âmes des attaques spirituelles. Que Ta lumière chasse toute ombre de notre chemin. Établis un mur de feu autour de nous et sois notre gloire au milieu de nous. Nous nous confions en Toi, notre Protecteur fidèle. Amen.",
     category: 'protection',
     isCompleted: false,
     readCount: 0
@@ -36,7 +36,7 @@ export const prayers: PrayerTopic[] = [
   {
     id: 5,
     title: "Prier pour la force",
-    content: "Seigneur, donne-moi la force de surmonter les défis de la vie. Aide-moi à rester ferme dans ma foi et à ne pas céder à la tentation.",
+    content: "Seigneur Tout-Puissant, source de toute force, je reconnais ma faiblesse et ma dépendance totale envers Toi. Ésaïe 40:31 nous assure : « Mais ceux qui se confient en l'Éternel renouvellent leur force. Ils prennent le vol comme les aigles. » Dans mes moments de fatigue physique, émotionnelle ou spirituelle, je viens puiser à Ta source inépuisable. Fortifie mon corps quand il est las, encourage mon cœur quand il est découragé, et raffermis mon esprit quand la foi vacille. Aide-moi à tenir ferme dans l'épreuve, à persévérer dans l'adversité, et à rester fidèle malgré les défis. Que Ta force se manifeste dans ma faiblesse et que Ta puissance soit parfaite en moi. Amen.",
     category: 'foi',
     isCompleted: false,
     readCount: 0
@@ -44,7 +44,7 @@ export const prayers: PrayerTopic[] = [
   {
     id: 6,
     title: "Demander la paix dans les relations",
-    content: "Seigneur, aide-moi à construire des relations saines et pacifiques. Que je puisse être un instrument de Ta paix dans le monde.",
+    content: "Prince de la Paix, Toi qui es venu réconcilier l'humanité avec Dieu, je Te prie pour l'harmonie dans toutes mes relations. Ta Parole dit dans Matthieu 5:9 : « Heureux ceux qui procurent la paix, car ils seront appelés fils de Dieu ! » Aide-moi à être un artisan de paix dans ma famille, parmi mes amis, collègues et dans ma communauté. Là où il y a conflit, apporte la réconciliation. Là où il y a malentendu, donne la compréhension. Là où il y a blessure, verse Ton baume guérisseur. Enseigne-moi à pardonner comme Tu me pardonnes, à aimer comme Tu m'aimes, et à servir comme Tu nous as servis. Que Tes relations soient un témoignage de Ton amour transformateur. Amen.",
     category: 'famille',
     isCompleted: false,
     readCount: 0
@@ -52,7 +52,7 @@ export const prayers: PrayerTopic[] = [
   {
     id: 7,
     title: "Prier pour la provision",
-    content: "Seigneur, pourvois à mes besoins et à ceux de ma famille. Aide-nous à faire confiance à Ta bonté et à Ta fidélité.",
+    content: "Jéhovah Jiré, mon Pourvoyeur fidèle, je me souviens que Tu connais tous mes besoins avant même que je Te les exprime. Matthieu 6:26 nous rappelle : « Regardez les oiseaux du ciel : ils ne sèment ni ne moissonnent... et votre Père céleste les nourrit ! » Je Te confie mes besoins matériels, financiers et spirituels. Pourvois à notre pain quotidien, à un toit sur nos têtes, aux vêtements pour nous couvrir. Mais plus encore, nourris nos âmes de Ta Parole, abreuve nos cœurs de Ton amour, et comble nos vies de Ta présence. Apprends-nous à être reconnaissants pour ce que nous avons, généreux envers ceux qui ont moins, et confiants en Ta fidélité pour l'avenir. Amen.",
     category: 'provision-blessing',
     isCompleted: false,
     readCount: 0
@@ -60,7 +60,7 @@ export const prayers: PrayerTopic[] = [
   {
     id: 8,
     title: "Demander le pardon",
-    content: "Seigneur, aide-moi à pardonner ceux qui m'ont blessé. Que je puisse libérer mon cœur de la rancune et vivre dans la paix.",
+    content: "Père miséricordieux, je viens devant Toi avec un cœur repentant, reconnaissant mes fautes et mes péchés. Ta Parole promet dans 1 Jean 1:9 : « Si nous confessons nos péchés, il est fidèle et juste pour nous les pardonner. » Je confesse mes manquements, mes paroles blessantes, mes pensées impures, et mes actions égoïstes. Lave-moi de toute iniquité, purifie-moi de tout péché. Crée en moi un cœur pur et renouvelle en moi un esprit bien disposé. Aide-moi non seulement à recevoir Ton pardon, mais aussi à pardonner à ceux qui m'ont offensé. Libère-moi de la culpabilité et de la honte, et donne-moi la grâce de marcher dans la nouveauté de vie. Amen.",
     category: 'pardon',
     isCompleted: false,
     readCount: 0
@@ -68,15 +68,15 @@ export const prayers: PrayerTopic[] = [
   {
     id: 9,
     title: "Prier pour la direction",
-    content: "Seigneur, guide-moi dans mes choix et mes décisions. Que je puisse suivre le chemin que Tu as tracé pour moi.",
-    category: 'diretion',
+    content: "Seigneur, mon Guide et mon Berger, je reconnais que sans Ta direction, je suis comme une brebis égarée. Proverbes 3:5-6 nous enseigne : « Confie-toi en l'Éternel de tout ton cœur... et il aplanira tes sentiers. » Dans les carrefours de la vie, éclaire mon chemin. Quand je dois prendre des décisions importantes, donne-moi la sagesse de discerner Ta volonté. Ferme les portes qui ne viennent pas de Toi et ouvre celles qui mènent à Tes desseins parfaits. Que Ton Esprit Saint soit ma boussole, Ta Parole ma carte routière, et Ta paix mon indicateur. Guide mes pas chaque jour et conduis-moi dans les sentiers de la justice pour l'amour de Ton nom. Amen.",
+    category: 'direction',
     isCompleted: false,
     readCount: 0
   },
   {
     id: 10,
     title: "Demander la joie",
-    content: "Seigneur, remplis mon cœur de joie et de gratitude. Aide-moi à voir les bénédictions dans ma vie et à les apprécier.",
+    content: "Dieu de toute joie, source de tout bonheur véritable, je viens à Toi pour que Tu remplisses mon cœur de Ta joie parfaite. Néhémie 8:10 déclare : « La joie de l'Éternel sera votre force. » Dans les moments de tristesse, rappelle-moi Tes bienfaits. Dans les saisons difficiles, aide-moi à garder les yeux fixés sur Toi. Transforme mes larmes en chants de louange, ma tristesse en allégresse. Que ma joie ne dépende pas des circonstances mais de ma relation avec Toi. Aide-moi à être reconnaissant pour chaque bénédiction, grande ou petite. Que cette joie divine soit contagieuse et attire d'autres à Toi. Remplis ma maison de rires, mon cœur de paix, et ma vie de Ton amour joyeux. Amen.",
     category: 'reconnaissance',
     isCompleted: false,
     readCount: 0
@@ -84,7 +84,7 @@ export const prayers: PrayerTopic[] = [
   {
     id: 11,
     title: "Prier pour la foi",
-    content: "Seigneur, renforce ma foi en Toi. Aide-moi à croire en Tes promesses et à rester ferme dans les épreuves.",
+    content: "Seigneur Jésus, auteur et consommateur de la foi, je Te demande d'augmenter ma foi comme l'ont demandé Tes disciples. Hébreux 11:1 définit la foi comme « une ferme assurance des choses qu'on espère, une démonstration de celles qu'on ne voit pas. » Fortifie ma foi quand elle vacille dans l'épreuve. Aide-moi à croire en Tes promesses même quand les circonstances semblent contraires. Que ma foi ne soit pas basée sur ce que je vois mais sur qui Tu es. Dans les vallées sombres, rappelle-moi Tes victoires passées. Dans l'attente, enseigne-moi la patience. Que ma foi soit active par l'amour et qu'elle inspire d'autres à Te faire confiance. Fais grandir en moi une foi inébranlable qui Te glorifie. Amen.",
     category: 'foi',
     isCompleted: false,
     readCount: 0
