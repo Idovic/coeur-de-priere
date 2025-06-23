@@ -58,12 +58,11 @@ const Index = () => {
     return matchesSearch && matchesTheme;
   });
 
-  // DIAGNOSTIC DÉTAILLÉ - Logs de débogage complets
-  console.log(`=== DIAGNOSTIC COMPLET DU RENDU DES PRIÈRES ===`);
+  // DIAGNOSTIC COMPLET CORRIGÉ - Compte toutes les catégories
+  console.log(`=== DIAGNOSTIC COMPLET CORRIGÉ ===`);
   console.log(`1. Données sources:`);
   console.log(`   - allPrayers.length: ${allPrayers.length}`);
   console.log(`   - prayersList.length: ${prayersList.length}`);
-  console.log(`   - IDs min/max: ${Math.min(...prayersList.map(p => p.id))} à ${Math.max(...prayersList.map(p => p.id))}`);
   
   console.log(`2. État du filtrage:`);
   console.log(`   - searchTerm: "${searchTerm}"`);
@@ -71,29 +70,28 @@ const Index = () => {
   console.log(`   - viewMode: ${viewMode}`);
   console.log(`   - filteredPrayers.length: ${filteredPrayers.length}`);
   
-  console.log(`3. Analyse des prières filtrées:`);
-  if (filteredPrayers.length > 0) {
-    console.log(`   - Première prière ID: ${filteredPrayers[0].id}`);
-    console.log(`   - Dernière prière ID: ${filteredPrayers[filteredPrayers.length - 1].id}`);
-    console.log(`   - Échantillon des 10 premiers IDs:`, filteredPrayers.slice(0, 10).map(p => p.id));
-    if (filteredPrayers.length > 50) {
-      console.log(`   - IDs 50-60:`, filteredPrayers.slice(50, 60).map(p => p.id));
-    }
-    if (filteredPrayers.length > 100) {
-      console.log(`   - IDs 100-110:`, filteredPrayers.slice(100, 110).map(p => p.id));
-    }
-  }
+  console.log(`3. Vérification COMPLÈTE par catégorie:`);
+  // Obtenir toutes les catégories uniques présentes dans les données
+  const allCategories = [...new Set(prayersList.map(p => p.category))];
+  let totalPrayersInCategories = 0;
   
-  console.log(`4. Vérification par thème:`);
-  themes.forEach(theme => {
-    const themeCount = prayersList.filter(p => p.category === theme.category).length;
-    console.log(`   - ${theme.title} (${theme.category}): ${themeCount} prières`);
+  allCategories.forEach(category => {
+    const categoryCount = prayersList.filter(p => p.category === category).length;
+    totalPrayersInCategories += categoryCount;
+    const themeInfo = themes.find(t => t.category === category);
+    const themeName = themeInfo ? themeInfo.title : `Catégorie inconnue (${category})`;
+    console.log(`   - ${themeName}: ${categoryCount} prières`);
   });
+  
+  console.log(`4. Vérification totale:`);
+  console.log(`   - Catégories trouvées: ${allCategories.length}`);
+  console.log(`   - Total prières dans catégories: ${totalPrayersInCategories}`);
+  console.log(`   - Correspond au total? ${totalPrayersInCategories === allPrayers.length ? '✅ OUI' : '❌ NON'}`);
   
   console.log(`5. État de rendu:`);
   console.log(`   - activeTab: ${activeTab}`);
   console.log(`   - Prières à rendre: ${activeTab === 'prayers' && viewMode === 'list' ? filteredPrayers.length : 'N/A (mode thèmes)'}`);
-  console.log(`=== FIN DU DIAGNOSTIC ===`);
+  console.log(`=== FIN DU DIAGNOSTIC CORRIGÉ ===`);
 
   const handlePrayerClick = (prayer: PrayerTopic) => {
     setPrayersList(prev => prev.map(p => 
@@ -288,7 +286,7 @@ const Index = () => {
               </>
             )}
 
-            {/* Vue liste filtrée - CORRECTION DU RENDU COMPLET */}
+            {/* Vue liste filtrée */}
             {viewMode === 'list' && (
               <>
                 <div className="flex items-center justify-between mb-6">
@@ -311,7 +309,7 @@ const Index = () => {
                   )}
                 </div>
 
-                {/* Barre de recherche simplifiée */}
+                {/* Barre de recherche */}
                 <Card className="glass-card border-white/40 bg-white/60 backdrop-blur-xl shadow-lg">
                   <div className="p-4">
                     <div className="relative">
@@ -326,34 +324,21 @@ const Index = () => {
                   </div>
                 </Card>
 
-                {/* CORRECTION CRITIQUE: Rendu sans limitation des prières */}
+                {/* Affichage des prières */}
                 <div className="space-y-4">
-                  <div className="text-center p-4 bg-blue-50 rounded-lg border border-blue-200">
-                    <p className="text-sm font-medium text-blue-800">
-                      🔍 Mode débogage: {filteredPrayers.length} prières à afficher
-                    </p>
-                  </div>
-                  
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredPrayers.map((prayer, index) => {
-                      // Log pour chaque prière rendue
-                      if (index < 5 || index > filteredPrayers.length - 6) {
-                        console.log(`Rendu prière ${index + 1}/${filteredPrayers.length}: ID ${prayer.id} - "${prayer.title}"`);
-                      }
-                      
-                      return (
-                        <div 
-                          key={`prayer-${prayer.id}-${index}`}
-                          className="animate-fade-in"
-                          style={{ animationDelay: `${Math.min(index * 50, 2000)}ms` }}
-                        >
-                          <PrayerCard
-                            prayer={prayer}
-                            onClick={() => handlePrayerClick(prayer)}
-                          />
-                        </div>
-                      );
-                    })}
+                    {filteredPrayers.map((prayer, index) => (
+                      <div 
+                        key={`prayer-${prayer.id}`}
+                        className="animate-fade-in"
+                        style={{ animationDelay: `${Math.min(index * 50, 2000)}ms` }}
+                      >
+                        <PrayerCard
+                          prayer={prayer}
+                          onClick={() => handlePrayerClick(prayer)}
+                        />
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -380,7 +365,6 @@ const Index = () => {
         {activeTab === 'settings' && (
           <div className="space-y-6">
             <NotificationSettings />
-            {/* Add other settings components here */}
           </div>
         )}
       </div>
