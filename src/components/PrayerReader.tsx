@@ -47,11 +47,9 @@ const PrayerReader: React.FC<PrayerReaderProps> = ({ prayer, onBack, onComplete 
             </h1>
             
             <div className="prose prose-lg max-w-none">
-              {prayer.content.split('\n\n').map((paragraph, index) => (
-                <p key={index} className="mb-6 text-serenity-700 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
+              <p className="text-serenity-700 leading-relaxed whitespace-pre-wrap">
+                {prayer.content}
+              </p>
             </div>
 
             {/* Actions */}

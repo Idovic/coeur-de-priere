@@ -71,8 +71,8 @@ const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick }) => {
           </div>
         </div>
         
-        <p className="text-serenity-600 text-sm leading-relaxed line-clamp-3">
-          {prayer.content.substring(0, 150)}...
+        <p className="text-serenity-600 text-sm leading-relaxed whitespace-pre-wrap">
+          {prayer.content}
         </p>
         
         <div className="mt-4 pt-4 border-t border-white/20">
