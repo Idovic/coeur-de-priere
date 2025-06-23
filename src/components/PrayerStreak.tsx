@@ -41,7 +41,7 @@ const PrayerStreak = () => {
         </div>
         <div className="flex gap-2">
           {['L', 'M', 'M', 'J', 'V', 'S', 'D'].map((day, index) => (
-            <div key={day} className="flex-1 text-center">
+            <div key={`day-${index}`} className="flex-1 text-center">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium mx-auto mb-1 ${
                 thisWeek[index] 
                   ? 'bg-prayer-gradient text-white shadow-prayer' 
