@@ -1,82 +1,73 @@
 
 import { PrayerTopic } from '../types/prayer';
-import { paixPrayers } from './prayers/paix';
-import { sagessePrayers } from './prayers/sagesse';
-import { healingComfortPrayers } from './prayers/healing-comfort';
-import { protectionPrayers } from './prayers/protection';
-import { foiPrayers } from './prayers/foi';
-import { famillePrayers } from './prayers/famille';
-import { provisionBlessingPrayers } from './prayers/provision-blessing';
-import { pardonPrayers } from './prayers/pardon';
-import { directionPrayers } from './prayers/direction';
-import { reconnaissancePrayers } from './prayers/reconnaissance';
-import { spiritualGrowthPrayers } from './prayers/spiritual-growth';
-import { societalGlobalPrayers } from './prayers/societal-global';
-import { churchCommunityPrayers } from './prayers/church-community';
-import { amourPrayers } from './prayers/amour';
-import { protectionDeliverancePrayers } from './prayers/protection-deliverance';
-import { wisdomGuidancePrayers } from './prayers/wisdom-guidance';
-import { familyRelationshipPrayers } from './prayers/family-relationship';
-import { additionalPrayers } from './prayers/additional';
+import { completePrayers } from './prayers/complete-prayers';
 
-export const allPrayers: PrayerTopic[] = [
-  ...paixPrayers,
-  ...sagessePrayers,
-  ...healingComfortPrayers,
-  ...protectionPrayers,
-  ...foiPrayers,
-  ...famillePrayers,
-  ...provisionBlessingPrayers,
-  ...pardonPrayers,
-  ...directionPrayers,
-  ...reconnaissancePrayers,
-  ...spiritualGrowthPrayers,
-  ...societalGlobalPrayers,
-  ...churchCommunityPrayers,
-  ...amourPrayers,
-  ...protectionDeliverancePrayers,
-  ...wisdomGuidancePrayers,
-  ...familyRelationshipPrayers,
-  ...additionalPrayers
-].sort((a, b) => a.id - b.id);
+export const allPrayers: PrayerTopic[] = completePrayers;
 
 export const prayersByCategory = {
-  'paix': paixPrayers,
-  'sagesse': sagessePrayers,
-  'healing-comfort': healingComfortPrayers,
-  'protection': protectionPrayers,
-  'foi': foiPrayers,
-  'famille': famillePrayers,
-  'provision-blessing': provisionBlessingPrayers,
-  'pardon': pardonPrayers,
-  'direction': directionPrayers,
-  'reconnaissance': reconnaissancePrayers,
-  'spiritual-growth': spiritualGrowthPrayers,
-  'societal-global': societalGlobalPrayers,
-  'church-community': churchCommunityPrayers,
-  'amour': amourPrayers,
-  'protection-deliverance': protectionDeliverancePrayers,
-  'wisdom-guidance': wisdomGuidancePrayers
+  'paix': allPrayers.filter(p => p.category === 'paix'),
+  'sagesse': allPrayers.filter(p => p.category === 'sagesse'),
+  'healing-comfort': allPrayers.filter(p => p.category === 'healing-comfort'),
+  'protection': allPrayers.filter(p => p.category === 'protection'),
+  'foi': allPrayers.filter(p => p.category === 'foi'),
+  'famille': allPrayers.filter(p => p.category === 'famille'),
+  'provision-blessing': allPrayers.filter(p => p.category === 'provision-blessing'),
+  'pardon': allPrayers.filter(p => p.category === 'pardon'),
+  'direction': allPrayers.filter(p => p.category === 'direction'),
+  'reconnaissance': allPrayers.filter(p => p.category === 'reconnaissance'),
+  'spiritual-growth': allPrayers.filter(p => p.category === 'spiritual-growth'),
+  'societal-global': allPrayers.filter(p => p.category === 'societal-global'),
+  'church-community': allPrayers.filter(p => p.category === 'church-community'),
+  'amour': allPrayers.filter(p => p.category === 'amour'),
+  'protection-deliverance': allPrayers.filter(p => p.category === 'protection-deliverance'),
+  'wisdom-guidance': allPrayers.filter(p => p.category === 'wisdom-guidance'),
+  'family-relationship': allPrayers.filter(p => p.category === 'family-relationship')
 };
 
-// Validation pour s'assurer que nous avons bien 110 prières
+// Validation stricte pour s'assurer que nous avons exactement 110 prières
+console.log(`=== VALIDATION FINALE DES PRIÈRES ===`);
 console.log(`Total des prières : ${allPrayers.length}`);
+
 if (allPrayers.length !== 110) {
-  console.warn(`Attention : ${allPrayers.length} prières trouvées, 110 attendues`);
+  console.error(`ERREUR CRITIQUE : ${allPrayers.length} prières trouvées, 110 attendues`);
+} else {
+  console.log(`✓ Nombre correct de prières : 110`);
 }
 
-// Vérification des IDs uniques
-const ids = allPrayers.map(p => p.id);
-const uniqueIds = new Set(ids);
-if (ids.length !== uniqueIds.size) {
-  console.error('Des IDs de prières sont dupliqués');
+// Vérification des IDs uniques et séquentiels
+const ids = allPrayers.map(p => p.id).sort((a, b) => a - b);
+const expectedIds = Array.from({length: 110}, (_, i) => i + 1);
+const missingIds = expectedIds.filter(id => !ids.includes(id));
+const duplicateIds = ids.filter((id, index) => ids.indexOf(id) !== index);
+
+if (missingIds.length > 0) {
+  console.error(`IDs manquants : [${missingIds.join(', ')}]`);
+} else {
+  console.log(`✓ Tous les IDs 1-110 sont présents`);
 }
 
-// Vérification de la séquence des IDs (1 à 110)
-for (let i = 1; i <= 110; i++) {
-  if (!ids.includes(i)) {
-    console.error(`Prière avec l'ID ${i} manquante`);
-  }
+if (duplicateIds.length > 0) {
+  console.error(`IDs dupliqués : [${duplicateIds.join(', ')}]`);
+} else {
+  console.log(`✓ Aucun ID dupliqué`);
 }
+
+// Vérification de la longueur des contenus
+const shortPrayers = allPrayers.filter(p => p.content.length < 200);
+if (shortPrayers.length > 0) {
+  console.warn(`Prières potentiellement tronquées (< 200 caractères) : [${shortPrayers.map(p => p.id).join(', ')}]`);
+} else {
+  console.log(`✓ Toutes les prières ont un contenu suffisant`);
+}
+
+// Vérification des titres
+const prayersWithoutTitle = allPrayers.filter(p => !p.title || p.title.trim() === '');
+if (prayersWithoutTitle.length > 0) {
+  console.error(`Prières sans titre : [${prayersWithoutTitle.map(p => p.id).join(', ')}]`);
+} else {
+  console.log(`✓ Toutes les prières ont un titre`);
+}
+
+console.log(`=== FIN DE LA VALIDATION ===`);
 
 export default allPrayers;
