@@ -34,9 +34,15 @@ const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick }) => {
     return categoryColors[category] || 'prayer-500';
   };
 
+  // Extract first 200 characters for preview
+  const getPreviewText = (content: string) => {
+    const preview = content.substring(0, 200);
+    return preview + (content.length > 200 ? '...' : '');
+  };
+
   return (
     <Card 
-      className="prayer-card group border-white/30 hover:border-white/50"
+      className="prayer-card group border-white/30 hover:border-white/50 cursor-pointer"
       onClick={onClick}
     >
       <div className="p-6">
@@ -71,8 +77,8 @@ const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick }) => {
           </div>
         </div>
         
-        <p className="text-serenity-600 text-sm leading-relaxed whitespace-pre-wrap">
-          {prayer.content}
+        <p className="text-serenity-600 text-sm leading-relaxed line-clamp-4">
+          {getPreviewText(prayer.content)}
         </p>
         
         <div className="mt-4 pt-4 border-t border-white/20">
