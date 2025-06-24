@@ -1,4 +1,5 @@
 
+
 const CACHE_NAME = 'coeur-de-priere-v2';
 const urlsToCache = [
   '/',
@@ -26,7 +27,7 @@ self.addEventListener('install', (event) => {
 
 // Stratégie de cache: Cache First pour les ressources statiques
 self.addEventListener('fetch', (event) => {
-  event.respon dWith(
+  event.respondWith(
     caches.match(event.request)
       .then((response) => {
         // Retourne la version en cache si disponible
@@ -80,3 +81,4 @@ self.addEventListener('notificationclick', (event) => {
     );
   }
 });
+
