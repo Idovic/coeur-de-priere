@@ -9,6 +9,7 @@ import NavigationBar from '../components/NavigationBar';
 import ThemeCard from '../components/ThemeCard';
 import SplashScreen from '../components/SplashScreen';
 import NotificationSettings from '../components/NotificationSettings';
+import AboutSection from '../components/AboutSection';
 import QuickActions from '../components/QuickActions';
 import { Card } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -464,6 +465,7 @@ const Index = () => {
         {activeTab === 'settings' && (
           <div className="space-y-6">
             <NotificationSettings />
+            <AboutSection />
           </div>
         )}
       </div>
