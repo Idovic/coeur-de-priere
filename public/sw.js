@@ -1,23 +1,32 @@
 
-const CACHE_NAME = 'coeur-de-priere-v1';
+const CACHE_NAME = 'coeur-de-priere-v2';
 const urlsToCache = [
   '/',
-  '/static/js/bundle.js',
-  '/static/css/main.css',
-  '/manifest.json'
+  '/assets/',
+  '/manifest.json',
+  '/icon-192.png',
+  '/icon-512.png',
+  '/lovable-uploads/44cc5b7e-c6a2-43ec-887b-1d8cf3f39dc5.png'
 ];
 
 // Installation du service worker
 self.addEventListener('install', (event) => {
+  console.log('Service Worker installing...');
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
+      .then((cache) => {
+        console.log('Cache opened');
+        return cache.addAll(urlsToCache);
+      })
+      .catch((error) => {
+        console.log('Cache failed:', error);
+      })
   );
 });
 
 // Stratégie de cache: Cache First pour les ressources statiques
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
+  event.respon dWith(
     caches.match(event.request)
       .then((response) => {
         // Retourne la version en cache si disponible
@@ -26,6 +35,9 @@ self.addEventListener('fetch', (event) => {
         }
         return fetch(event.request);
       })
+      .catch((error) => {
+        console.log('Fetch failed:', error);
+      })
   );
 });
 
@@ -33,7 +45,7 @@ self.addEventListener('fetch', (event) => {
 self.addEventListener('push', (event) => {
   const options = {
     body: event.data ? event.data.text() : 'Une nouvelle prière vous attend',
-    icon: '/icon-192.png',
+    icon: '/lovable-uploads/44cc5b7e-c6a2-43ec-887b-1d8cf3f39dc5.png',
     badge: '/icon-192.png',
     vibrate: [100, 50, 100],
     data: {
