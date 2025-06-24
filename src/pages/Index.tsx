@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { allPrayers } from '../data/prayers';
 import { themes } from '../data/themes';
@@ -10,7 +9,6 @@ import NavigationBar from '../components/NavigationBar';
 import ThemeCard from '../components/ThemeCard';
 import SplashScreen from '../components/SplashScreen';
 import NotificationSettings from '../components/NotificationSettings';
-import PrayerStreak from '../components/PrayerStreak';
 import QuickActions from '../components/QuickActions';
 import { Card } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
@@ -238,33 +236,18 @@ const Index = () => {
         {activeTab === 'prayers' && (
           <div className="space-y-8">
             
-            {/* Quick Actions and Streak */}
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div className="lg:col-span-2">
-                <QuickActions
-                  onRandomPrayer={handleRandomPrayer}
-                  onFavorites={handleShowFavorites}
-                  onDailyReading={handleRandomPrayer}
-                  onShare={handleShare}
-                  prayers={prayersList}
-                />
-              </div>
-              <PrayerStreak />
-            </div>
+            {/* Quick Actions seulement */}
+            <QuickActions
+              onRandomPrayer={handleRandomPrayer}
+              onFavorites={handleShowFavorites}
+              onDailyReading={handleRandomPrayer}
+              onShare={handleShare}
+              prayers={prayersList}
+            />
 
             {/* Vue thématique moderne */}
             {viewMode === 'themes' && (
               <>
-                <div className="text-center mb-8">
-                  <h2 className="text-2xl font-bold text-prayer-900 mb-4 font-nunito">
-                    Découvrez nos Thématiques Spirituelles
-                  </h2>
-                  <p className="text-prayer-700 font-inter max-w-2xl mx-auto">
-                    Chaque thème contient des prières soigneusement sélectionnées pour vous accompagner 
-                    dans vos différents besoins spirituels et moments de vie
-                  </p>
-                </div>
-
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   {themes.map((theme, index) => {
                     const themePrayerCount = prayersList.filter(p => p.category === theme.category).length;
