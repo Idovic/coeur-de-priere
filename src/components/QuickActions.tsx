@@ -20,17 +20,14 @@ const QuickActions: React.FC<QuickActionsProps> = ({
   onShare,
   prayers = []
 }) => {
-  const [favorites, setFavorites] = useState<number[]>(() => {
+  const [favorites] = useState<number[]>(() => {
     const saved = localStorage.getItem('prayerFavorites');
     return saved ? JSON.parse(saved) : [];
   });
 
   const handleFavoritesClick = () => {
-    console.log('Favorites clicked, count:', favorites.length);
-    // For now, we'll filter prayers and show them
-    const favoritePrayers = prayers.filter(p => favorites.includes(p.id));
-    console.log('Favorite prayers:', favoritePrayers);
-    onFavorites(); // This will switch to list view
+    console.log('Bouton favoris cliqué, nombre de favoris:', favorites.length);
+    onFavorites();
   };
 
   const installPWA = () => {
@@ -68,7 +65,7 @@ const QuickActions: React.FC<QuickActionsProps> = ({
         <Button
           onClick={handleFavoritesClick}
           variant="outline"
-          className="bg-white/40 border-mystic-400 text-mystic-800 hover:bg-mystic-100 hover:border-mystic-500 h-auto py-3 flex-col gap-2 font-semibold"
+          className="bg-white/40 border-red-400 text-red-800 hover:bg-red-100 hover:border-red-500 h-auto py-3 flex-col gap-2 font-semibold"
         >
           <Heart className="w-5 h-5" />
           <span className="text-xs">Mes favoris ({favorites.length})</span>

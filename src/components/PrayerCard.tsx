@@ -8,9 +8,11 @@ import { Check, Heart } from 'lucide-react';
 interface PrayerCardProps {
   prayer: PrayerTopic;
   onClick: () => void;
+  onToggleFavorite?: (prayerId: number) => void;
+  isFavorite?: boolean;
 }
 
-const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick }) => {
+const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick, onToggleFavorite, isFavorite = false }) => {
   const getCategoryColor = (category: string) => {
     const categoryColors: Record<string, string> = {
       'foi': 'prayer-500',
@@ -34,15 +36,22 @@ const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick }) => {
     return categoryColors[category] || 'prayer-500';
   };
 
-  // Extract first 200 characters for preview
+  // Extract first 150 characters for preview
   const getPreviewText = (content: string) => {
-    const preview = content.substring(0, 200);
-    return preview + (content.length > 200 ? '...' : '');
+    const preview = content.substring(0, 150);
+    return preview + (content.length > 150 ? '...' : '');
+  };
+
+  const handleFavoriteClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Empêcher l'ouverture de la prière
+    if (onToggleFavorite) {
+      onToggleFavorite(prayer.id);
+    }
   };
 
   return (
     <Card 
-      className="prayer-card group border-white/30 hover:border-white/50 cursor-pointer"
+      className="prayer-card group border-white/30 hover:border-white/50 cursor-pointer relative"
       onClick={onClick}
     >
       <div className="p-6">
@@ -62,6 +71,23 @@ const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick }) => {
           </div>
           
           <div className="ml-4 flex flex-col items-center gap-2">
+            {/* Bouton Favori */}
+            <button
+              onClick={handleFavoriteClick}
+              className={`w-8 h-8 rounded-full flex items-center justify-center transition-all hover:scale-110 ${
+                isFavorite 
+                  ? 'bg-red-100 hover:bg-red-200' 
+                  : 'bg-gray-100 hover:bg-gray-200'
+              }`}
+              title={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
+            >
+              <Heart 
+                className={`w-4 h-4 transition-colors ${
+                  isFavorite ? 'text-red-500 fill-red-500' : 'text-gray-500'
+                }`} 
+              />
+            </button>
+
             {prayer.isCompleted && (
               <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
                 <Check className="w-4 h-4 text-emerald-600" />

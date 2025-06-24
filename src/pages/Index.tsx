@@ -28,6 +28,18 @@ const Index = () => {
   const [showSplash, setShowSplash] = useState(true);
   const [viewMode, setViewMode] = useState<'themes' | 'list'>('themes');
   const [showNotificationSettings, setShowNotificationSettings] = useState(false);
+  const [showFavoritesOnly, setShowFavoritesOnly] = useState(false);
+
+  // Gestion des favoris
+  const [favorites, setFavorites] = useState<number[]>(() => {
+    const saved = localStorage.getItem('prayerFavorites');
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  // Sauvegarder les favoris dans localStorage
+  useEffect(() => {
+    localStorage.setItem('prayerFavorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   // PWA installation
   useEffect(() => {
@@ -49,13 +61,34 @@ const Index = () => {
     setShowSplash(false);
   };
 
-  // Filtrer les prières selon le thème sélectionné et la recherche
+  // Fonction pour basculer les favoris
+  const toggleFavorite = (prayerId: number) => {
+    setFavorites(prev => {
+      if (prev.includes(prayerId)) {
+        return prev.filter(id => id !== prayerId);
+      } else {
+        return [...prev, prayerId];
+      }
+    });
+  };
+
+  // Fonction pour afficher les favoris
+  const handleShowFavorites = () => {
+    console.log('Affichage des favoris, count:', favorites.length);
+    setShowFavoritesOnly(true);
+    setSelectedTheme(null);
+    setViewMode('list');
+    setSearchTerm('');
+  };
+
+  // Filtrer les prières selon le thème sélectionné, la recherche et les favoris
   const filteredPrayers = prayersList.filter(prayer => {
     const matchesSearch = searchTerm === '' || 
       prayer.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       prayer.content.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesTheme = !selectedTheme || prayer.category === selectedTheme;
-    return matchesSearch && matchesTheme;
+    const matchesFavorites = !showFavoritesOnly || favorites.includes(prayer.id);
+    return matchesSearch && matchesTheme && matchesFavorites;
   });
 
   // DIAGNOSTIC COMPLET CORRIGÉ - Compte toutes les catégories
@@ -119,14 +152,15 @@ const Index = () => {
     console.log(`Thème sélectionné: ${themeId}`);
     const themePrayers = prayersList.filter(p => p.category === themeId);
     console.log(`Prières dans ce thème: ${themePrayers.length}`);
-    console.log(`IDs des prières du thème:`, themePrayers.map(p => p.id).sort((a,b) => a-b));
     
     setSelectedTheme(themeId);
+    setShowFavoritesOnly(false);
     setViewMode('list');
   };
 
   const backToThemes = () => {
     setSelectedTheme(null);
+    setShowFavoritesOnly(false);
     setViewMode('themes');
     setSearchTerm('');
   };
@@ -209,7 +243,7 @@ const Index = () => {
               <div className="lg:col-span-2">
                 <QuickActions
                   onRandomPrayer={handleRandomPrayer}
-                  onFavorites={() => setViewMode('list')}
+                  onFavorites={handleShowFavorites}
                   onDailyReading={handleRandomPrayer}
                   onShare={handleShare}
                   prayers={prayersList}
@@ -297,16 +331,22 @@ const Index = () => {
                     ← Retour aux thématiques
                   </button>
                   
-                  {selectedTheme && (
-                    <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-4">
+                    {showFavoritesOnly && (
+                      <Badge className="bg-red-500 text-white border-white/40">
+                        <Heart className="w-3 h-3 mr-1" />
+                        Mes favoris
+                      </Badge>
+                    )}
+                    {selectedTheme && !showFavoritesOnly && (
                       <Badge className="bg-prayer-gradient text-white border-white/40">
                         {themes.find(t => t.category === selectedTheme)?.title}
                       </Badge>
-                      <div className="text-sm text-prayer-700 font-medium">
-                        {filteredPrayers.length} prière{filteredPrayers.length > 1 ? 's' : ''}
-                      </div>
+                    )}
+                    <div className="text-sm text-prayer-700 font-medium">
+                      {filteredPrayers.length} prière{filteredPrayers.length > 1 ? 's' : ''}
                     </div>
-                  )}
+                  </div>
                 </div>
 
                 {/* Barre de recherche */}
@@ -315,7 +355,7 @@ const Index = () => {
                     <div className="relative">
                       <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-prayer-600" />
                       <Input
-                        placeholder="Rechercher dans cette thématique..."
+                        placeholder={showFavoritesOnly ? "Rechercher dans vos favoris..." : "Rechercher dans cette thématique..."}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="pl-10 bg-white/60 border-white/60 focus:border-prayer-400 focus:ring-prayer-300 rounded-xl text-prayer-800"
@@ -336,6 +376,8 @@ const Index = () => {
                         <PrayerCard
                           prayer={prayer}
                           onClick={() => handlePrayerClick(prayer)}
+                          onToggleFavorite={toggleFavorite}
+                          isFavorite={favorites.includes(prayer.id)}
                         />
                       </div>
                     ))}
@@ -345,13 +387,18 @@ const Index = () => {
                 {filteredPrayers.length === 0 && (
                   <Card className="glass-card border-white/40 bg-white/60 backdrop-blur-xl text-center py-16 shadow-lg">
                     <div className="floating mb-6">
-                      <span className="text-6xl opacity-50">🔍</span>
+                      <span className="text-6xl opacity-50">
+                        {showFavoritesOnly ? '💕' : '🔍'}
+                      </span>
                     </div>
                     <h3 className="text-xl font-semibold text-prayer-900 mb-3 font-nunito">
-                      Aucune prière trouvée
+                      {showFavoritesOnly ? 'Aucun favori trouvé' : 'Aucune prière trouvée'}
                     </h3>
                     <p className="text-prayer-700 max-w-md mx-auto font-inter">
-                      Essayez avec d'autres mots-clés ou retournez aux thématiques
+                      {showFavoritesOnly 
+                        ? 'Ajoutez des prières à vos favoris en cliquant sur le cœur'
+                        : 'Essayez avec d\'autres mots-clés ou retournez aux thématiques'
+                      }
                     </p>
                   </Card>
                 )}
