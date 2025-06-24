@@ -293,7 +293,7 @@ const Index = () => {
             Cœur de Prière
           </h1>
           <p className="text-prayer-800 text-xl font-medium mb-2 font-inter">
-            Votre compagnon spirituuel au quotidien
+            Votre compagnon spirituel au quotidien
           </p>
           <p className="text-prayer-700 text-sm font-inter max-w-md mx-auto">
             Découvrez {prayersList.length} prières organisées par thèmes pour enrichir votre relation avec Dieu
