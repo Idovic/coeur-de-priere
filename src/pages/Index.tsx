@@ -16,6 +16,7 @@ import { Input } from '../components/ui/input';
 import { Button } from '../components/ui/button';
 import { PrayerTopic } from '../types/prayer';
 import { Heart, Sparkles, Search, Filter, Settings, Shuffle, Share2 } from 'lucide-react';
+import { toast } from '../hooks/use-toast';
 
 const Index = () => {
   const [selectedPrayer, setSelectedPrayer] = useState<PrayerTopic | null>(null);
@@ -170,19 +171,86 @@ const Index = () => {
   };
 
   const handleShare = async () => {
-    if (navigator.share) {
-      try {
-        await navigator.share({
-          title: 'Cœur de Prière',
-          text: 'Découvrez cette application de prière qui transforme ma vie spirituelle',
-          url: window.location.href,
+    const shareData = {
+      title: 'Cœur de Prière',
+      text: 'Découvrez cette magnifique application de prière qui transforme ma vie spirituelle. Plus de 200 prières organisées par thèmes pour enrichir votre relation avec Dieu.',
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+        toast({
+          title: "Partage réussi !",
+          description: "Merci de partager Cœur de Prière avec vos proches",
         });
-      } catch (error) {
-        console.log('Erreur lors du partage:', error);
+      } else {
+        // Fallback pour les navigateurs qui ne supportent pas Web Share API
+        await navigator.clipboard.writeText(window.location.href);
+        toast({
+          title: "Lien copié !",
+          description: "Le lien de l'application a été copié dans votre presse-papier",
+        });
       }
-    } else {
-      // Fallback pour les navigateurs qui ne supportent pas Web Share API
-      navigator.clipboard.writeText(window.location.href);
+    } catch (error) {
+      console.log('Erreur lors du partage:', error);
+      // Fallback final - copier dans le presse-papier
+      try {
+        await navigator.clipboard.writeText(window.location.href);
+        toast({
+          title: "Lien copié !",
+          description: "Le lien de l'application a été copié dans votre presse-papier",
+        });
+      } catch (clipboardError) {
+        toast({
+          title: "Erreur de partage",
+          description: "Impossible de partager ou copier le lien. Vous pouvez copier manuellement l'URL depuis la barre d'adresse.",
+          variant: "destructive",
+        });
+      }
+    }
+  };
+
+  const handlePrayerShare = async (prayer: PrayerTopic) => {
+    const shareData = {
+      title: `${prayer.title} - Cœur de Prière`,
+      text: `Cette prière m'a touché(e), je la partage avec vous :\n\n"${prayer.title}"\n\n${prayer.content.substring(0, 200)}${prayer.content.length > 200 ? '...' : ''}\n\nDécouvrez plus de prières sur Cœur de Prière`,
+      url: window.location.href,
+    };
+
+    try {
+      if (navigator.share && navigator.canShare && navigator.canShare(shareData)) {
+        await navigator.share(shareData);
+        toast({
+          title: "Prière partagée !",
+          description: `"${prayer.title}" a été partagée avec succès`,
+        });
+      } else {
+        // Fallback - copier le texte de la prière
+        const textToShare = `${shareData.title}\n\n${shareData.text}\n\n${shareData.url}`;
+        await navigator.clipboard.writeText(textToShare);
+        toast({
+          title: "Prière copiée !",
+          description: "Le texte de la prière a été copié dans votre presse-papier",
+        });
+      }
+    } catch (error) {
+      console.log('Erreur lors du partage de la prière:', error);
+      // Fallback final
+      try {
+        const textToShare = `"${prayer.title}"\n\n${prayer.content}\n\nDécouvrez plus de prières sur ${window.location.href}`;
+        await navigator.clipboard.writeText(textToShare);
+        toast({
+          title: "Prière copiée !",
+          description: "Le texte de la prière a été copié dans votre presse-papier",
+        });
+      } catch (clipboardError) {
+        toast({
+          title: "Erreur de partage",
+          description: "Impossible de partager cette prière. Vous pouvez copier manuellement le texte.",
+          variant: "destructive",
+        });
+      }
     }
   };
 
@@ -361,6 +429,7 @@ const Index = () => {
                           onClick={() => handlePrayerClick(prayer)}
                           onToggleFavorite={toggleFavorite}
                           isFavorite={favorites.includes(prayer.id)}
+                          onShare={() => handlePrayerShare(prayer)}
                         />
                       </div>
                     ))}

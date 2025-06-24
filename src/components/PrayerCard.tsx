@@ -3,16 +3,23 @@ import React from 'react';
 import { PrayerTopic } from '../types/prayer';
 import { Card } from './ui/card';
 import { Badge } from './ui/badge';
-import { Check, Heart } from 'lucide-react';
+import { Check, Heart, Share2 } from 'lucide-react';
 
 interface PrayerCardProps {
   prayer: PrayerTopic;
   onClick: () => void;
   onToggleFavorite?: (prayerId: number) => void;
   isFavorite?: boolean;
+  onShare?: () => void;
 }
 
-const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick, onToggleFavorite, isFavorite = false }) => {
+const PrayerCard: React.FC<PrayerCardProps> = ({ 
+  prayer, 
+  onClick, 
+  onToggleFavorite, 
+  isFavorite = false,
+  onShare 
+}) => {
   const getCategoryColor = (category: string) => {
     const categoryColors: Record<string, string> = {
       'foi': 'prayer-500',
@@ -49,6 +56,13 @@ const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick, onToggleFavori
     }
   };
 
+  const handleShareClick = (e: React.MouseEvent) => {
+    e.stopPropagation(); // Empêcher l'ouverture de la prière
+    if (onShare) {
+      onShare();
+    }
+  };
+
   return (
     <Card 
       className="prayer-card group border-white/30 hover:border-white/50 cursor-pointer relative"
@@ -71,22 +85,36 @@ const PrayerCard: React.FC<PrayerCardProps> = ({ prayer, onClick, onToggleFavori
           </div>
           
           <div className="ml-4 flex flex-col items-center gap-2">
-            {/* Bouton Favori */}
-            <button
-              onClick={handleFavoriteClick}
-              className={`w-8 h-8 rounded-full flex items-center justify-center transition-all hover:scale-110 ${
-                isFavorite 
-                  ? 'bg-red-100 hover:bg-red-200' 
-                  : 'bg-gray-100 hover:bg-gray-200'
-              }`}
-              title={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
-            >
-              <Heart 
-                className={`w-4 h-4 transition-colors ${
-                  isFavorite ? 'text-red-500 fill-red-500' : 'text-gray-500'
-                }`} 
-              />
-            </button>
+            {/* Boutons d'action */}
+            <div className="flex gap-1">
+              {/* Bouton Partage */}
+              {onShare && (
+                <button
+                  onClick={handleShareClick}
+                  className="w-8 h-8 rounded-full flex items-center justify-center transition-all hover:scale-110 bg-blue-100 hover:bg-blue-200"
+                  title="Partager cette prière"
+                >
+                  <Share2 className="w-4 h-4 text-blue-600" />
+                </button>
+              )}
+
+              {/* Bouton Favori */}
+              <button
+                onClick={handleFavoriteClick}
+                className={`w-8 h-8 rounded-full flex items-center justify-center transition-all hover:scale-110 ${
+                  isFavorite 
+                    ? 'bg-red-100 hover:bg-red-200' 
+                    : 'bg-gray-100 hover:bg-gray-200'
+                }`}
+                title={isFavorite ? "Retirer des favoris" : "Ajouter aux favoris"}
+              >
+                <Heart 
+                  className={`w-4 h-4 transition-colors ${
+                    isFavorite ? 'text-red-500 fill-red-500' : 'text-gray-500'
+                  }`} 
+                />
+              </button>
+            </div>
 
             {prayer.isCompleted && (
               <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center">
