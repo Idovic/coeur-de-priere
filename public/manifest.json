@@ -13,16 +13,25 @@
   "categories": ["lifestyle", "education"],
   "icons": [
     {
-      "src": "/icon-192.png",
-      "sizes": "192x192",
+      "src": "/lovable-uploads/44cc5b7e-c6a2-43ec-887b-1d8cf3f39dc5.png",
+      "sizes": "any",
       "type": "image/png",
       "purpose": "any maskable"
-    },
+    }
+  ],
+  "shortcuts": [
     {
-      "src": "/icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "name": "Prière du jour",
+      "short_name": "Prière",
+      "description": "Accéder à la prière du jour",
+      "url": "/",
+      "icons": [
+        {
+          "src": "/lovable-uploads/44cc5b7e-c6a2-43ec-887b-1d8cf3f39dc5.png",
+          "sizes": "any",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }
