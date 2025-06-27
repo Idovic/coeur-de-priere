@@ -1,7 +1,7 @@
 
-const CACHE_NAME = 'coeur-de-priere-v5';
-const STATIC_CACHE = 'static-v5';
-const DYNAMIC_CACHE = 'dynamic-v5';
+const CACHE_NAME = 'coeur-de-priere-v6';
+const STATIC_CACHE = 'static-v6';
+const DYNAMIC_CACHE = 'dynamic-v6';
 
 // Ressources essentielles - seulement celles qui existent
 const CORE_ASSETS = [
@@ -11,7 +11,7 @@ const CORE_ASSETS = [
 
 // Installation
 self.addEventListener('install', (event) => {
-  console.log('🔧 SW: Installation v5...');
+  console.log('🔧 SW: Installation v6...');
   event.waitUntil(
     caches.open(STATIC_CACHE)
       .then((cache) => {
@@ -19,7 +19,7 @@ self.addEventListener('install', (event) => {
         return cache.addAll(CORE_ASSETS);
       })
       .then(() => {
-        console.log('✅ SW: Installation terminée');
+        console.log('✅ SW: Installation terminée v6');
         return self.skipWaiting();
       })
       .catch((error) => {
@@ -30,7 +30,7 @@ self.addEventListener('install', (event) => {
 
 // Activation
 self.addEventListener('activate', (event) => {
-  console.log('🚀 SW: Activation...');
+  console.log('🚀 SW: Activation v6...');
   event.waitUntil(
     caches.keys()
       .then((cacheNames) => {
@@ -44,7 +44,7 @@ self.addEventListener('activate', (event) => {
         );
       })
       .then(() => {
-        console.log('✅ SW: Activé et prêt');
+        console.log('✅ SW: Activé et prêt v6');
         return self.clients.claim();
       })
   );
