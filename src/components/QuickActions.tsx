@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
-import { Heart, Shuffle, BookOpen, Bell, Share2, Download } from 'lucide-react';
+import { Heart, Shuffle, BookOpen, Share2, Download, Smartphone, AlertCircle } from 'lucide-react';
 import { PrayerTopic } from '../types/prayer';
 
 interface QuickActionsProps {
@@ -26,46 +26,99 @@ const QuickActions: React.FC<QuickActionsProps> = ({
   });
 
   const [showInstallButton, setShowInstallButton] = useState(false);
+  const [installStatus, setInstallStatus] = useState<'waiting' | 'available' | 'installed' | 'error'>('waiting');
+  const [debugInfo, setDebugInfo] = useState<string[]>([]);
 
   useEffect(() => {
-    // Vérifier si PWA est installable
-    const checkInstallability = () => {
-      // @ts-ignore
-      if (window.deferredPrompt) {
-        console.log('🎯 PWA: Bouton installation affiché');
-        setShowInstallButton(true);
-      }
+    console.log('🎯 QuickActions: Initialisation PWA...');
+    
+    const addDebug = (message: string) => {
+      console.log(message);
+      setDebugInfo(prev => [...prev.slice(-4), message]);
     };
 
-    // Vérifier immédiatement
-    checkInstallability();
+    // Vérifier si PWA est déjà installée
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      addDebug('📱 PWA: Déjà installée');
+      setInstallStatus('installed');
+      return;
+    }
 
-    // Écouter l'événement personnalisé
-    window.addEventListener('pwa-installable', checkInstallability);
+    // Vérifier si prompt disponible immédiatement
+    // @ts-ignore
+    if (window.deferredPrompt) {
+      addDebug('🎯 PWA: Prompt disponible immédiatement');
+      setShowInstallButton(true);
+      setInstallStatus('available');
+    }
+
+    // Écouter l'événement installable
+    const handleInstallable = (event: any) => {
+      addDebug('📡 PWA: Événement installable reçu');
+      console.log('📱 PWA: Détails événement:', event.detail);
+      setShowInstallButton(true);
+      setInstallStatus('available');
+    };
+
+    // Écouter l'installation
+    const handleInstalled = () => {
+      addDebug('🎉 PWA: Installation confirmée');
+      setShowInstallButton(false);
+      setInstallStatus('installed');
+    };
+
+    window.addEventListener('pwa-installable', handleInstallable);
+    window.addEventListener('pwa-installed', handleInstalled);
+
+    // Vérification périodique
+    const checkInterval = setInterval(() => {
+      // @ts-ignore
+      if (window.deferredPrompt && !showInstallButton) {
+        addDebug('🔄 PWA: Prompt détecté en vérification');
+        setShowInstallButton(true);
+        setInstallStatus('available');
+      }
+    }, 2000);
+
+    // Timeout pour détecter les problèmes
+    const timeout = setTimeout(() => {
+      if (installStatus === 'waiting') {
+        addDebug('⏰ PWA: Timeout - critères non remplis');
+        setInstallStatus('error');
+      }
+    }, 10000);
 
     return () => {
-      window.removeEventListener('pwa-installable', checkInstallability);
+      window.removeEventListener('pwa-installable', handleInstallable);
+      window.removeEventListener('pwa-installed', handleInstalled);
+      clearInterval(checkInterval);
+      clearTimeout(timeout);
     };
-  }, []);
+  }, [installStatus, showInstallButton]);
 
   const handleFavoritesClick = () => {
-    console.log('Bouton favoris cliqué, nombre de favoris:', favorites.length);
+    console.log('❤️ Bouton favoris cliqué, nombre:', favorites.length);
     onFavorites();
   };
 
   const installPWA = async () => {
     console.log('🚀 PWA: Tentative installation...');
+    
     try {
       // @ts-ignore
       if (window.deferredPrompt) {
+        console.log('📱 PWA: Affichage du prompt...');
         // @ts-ignore
         const result = await window.deferredPrompt.prompt();
-        console.log('📊 PWA: Choix utilisateur:', result);
+        console.log('📊 PWA: Résultat prompt:', result);
         
         // @ts-ignore
         const choiceResult = await window.deferredPrompt.userChoice;
+        console.log('👤 PWA: Choix utilisateur:', choiceResult);
+        
         if (choiceResult.outcome === 'accepted') {
           console.log('✅ PWA: Installation acceptée');
+          setInstallStatus('installed');
         } else {
           console.log('❌ PWA: Installation refusée');
         }
@@ -75,9 +128,44 @@ const QuickActions: React.FC<QuickActionsProps> = ({
         setShowInstallButton(false);
       } else {
         console.log('❌ PWA: Pas de prompt disponible');
+        setInstallStatus('error');
       }
     } catch (error) {
       console.error('❌ PWA: Erreur installation:', error);
+      setInstallStatus('error');
+    }
+  };
+
+  const getInstallButtonContent = () => {
+    switch (installStatus) {
+      case 'available':
+        return (
+          <>
+            <Download className="w-4 h-4 mr-2" />
+            Installer l'app
+          </>
+        );
+      case 'installed':
+        return (
+          <>
+            <Smartphone className="w-4 h-4 mr-2" />
+            App installée ✅
+          </>
+        );
+      case 'error':
+        return (
+          <>
+            <AlertCircle className="w-4 h-4 mr-2" />
+            Non installable
+          </>
+        );
+      default:
+        return (
+          <>
+            <Download className="w-4 h-4 mr-2" />
+            Vérification...
+          </>
+        );
     }
   };
 
@@ -125,14 +213,31 @@ const QuickActions: React.FC<QuickActionsProps> = ({
         </Button>
       </div>
 
-      {showInstallButton && (
+      {/* Bouton d'installation PWA */}
+      {(showInstallButton || installStatus !== 'waiting') && (
         <Button
           onClick={installPWA}
-          className="w-full mt-3 bg-prayer-gradient text-white hover:opacity-90 font-semibold"
+          disabled={installStatus === 'installed' || installStatus === 'error'}
+          className={`w-full mt-3 font-semibold ${
+            installStatus === 'available' 
+              ? 'bg-prayer-gradient text-white hover:opacity-90' 
+              : installStatus === 'installed'
+              ? 'bg-green-500 text-white cursor-default'
+              : 'bg-gray-400 text-white cursor-not-allowed'
+          }`}
         >
-          <Download className="w-4 h-4 mr-2" />
-          Installer l'application
+          {getInstallButtonContent()}
         </Button>
+      )}
+
+      {/* Debug info en développement */}
+      {process.env.NODE_ENV === 'development' && debugInfo.length > 0 && (
+        <div className="mt-3 p-2 bg-gray-100 rounded text-xs">
+          <div className="font-bold mb-1">Debug PWA:</div>
+          {debugInfo.map((info, index) => (
+            <div key={index} className="text-gray-600">{info}</div>
+          ))}
+        </div>
       )}
     </Card>
   );
