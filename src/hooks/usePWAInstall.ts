@@ -28,6 +28,31 @@ export const usePWAInstall = () => {
       }
     }
 
+    const handleInstall = async () => {
+      try {
+        // @ts-ignore
+        if (window.deferredPrompt) {
+          // @ts-ignore
+          await window.deferredPrompt.prompt();
+          // @ts-ignore
+          const choiceResult = await window.deferredPrompt.userChoice;
+          
+          if (choiceResult.outcome === 'accepted') {
+            localStorage.removeItem('pwa-install-refused');
+          }
+          
+          // @ts-ignore
+          window.deferredPrompt = null;
+        }
+      } catch (error) {
+        console.error('Erreur installation PWA:', error);
+      }
+    };
+
+    const handleDismiss = () => {
+      localStorage.setItem('pwa-install-refused', Date.now().toString());
+    };
+
     const showInstallPrompt = () => {
       if (hasShownPrompt) return;
       
@@ -55,31 +80,6 @@ export const usePWAInstall = () => {
           </div>
         )
       });
-    };
-
-    const handleInstall = async () => {
-      try {
-        // @ts-ignore
-        if (window.deferredPrompt) {
-          // @ts-ignore
-          await window.deferredPrompt.prompt();
-          // @ts-ignore
-          const choiceResult = await window.deferredPrompt.userChoice;
-          
-          if (choiceResult.outcome === 'accepted') {
-            localStorage.removeItem('pwa-install-refused');
-          }
-          
-          // @ts-ignore
-          window.deferredPrompt = null;
-        }
-      } catch (error) {
-        console.error('Erreur installation PWA:', error);
-      }
-    };
-
-    const handleDismiss = () => {
-      localStorage.setItem('pwa-install-refused', Date.now().toString());
     };
 
     // Écouter l'événement installable
