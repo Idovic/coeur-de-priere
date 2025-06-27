@@ -1,8 +1,8 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
-import { Heart, Shuffle, BookOpen, Share2, Download, AlertCircle } from 'lucide-react';
+import { Heart, Shuffle, BookOpen, Share2 } from 'lucide-react';
 import { PrayerTopic } from '../types/prayer';
 
 interface QuickActionsProps {
@@ -25,115 +25,8 @@ const QuickActions: React.FC<QuickActionsProps> = ({
     return saved ? JSON.parse(saved) : [];
   });
 
-  const [showInstallButton, setShowInstallButton] = useState(false);
-  const [installStatus, setInstallStatus] = useState<'waiting' | 'available' | 'installed' | 'error'>('waiting');
-
-  useEffect(() => {
-    // Vérifier si PWA est déjà installée
-    if (window.matchMedia('(display-mode: standalone)').matches) {
-      setInstallStatus('installed');
-      return;
-    }
-
-    // Vérifier si prompt disponible immédiatement
-    // @ts-ignore
-    if (window.deferredPrompt) {
-      setShowInstallButton(true);
-      setInstallStatus('available');
-    }
-
-    // Écouter l'événement installable
-    const handleInstallable = () => {
-      setShowInstallButton(true);
-      setInstallStatus('available');
-    };
-
-    // Écouter l'installation
-    const handleInstalled = () => {
-      setShowInstallButton(false);
-      setInstallStatus('installed');
-    };
-
-    window.addEventListener('pwa-installable', handleInstallable);
-    window.addEventListener('pwa-installed', handleInstalled);
-
-    // Vérification périodique
-    const checkInterval = setInterval(() => {
-      // @ts-ignore
-      if (window.deferredPrompt && !showInstallButton) {
-        setShowInstallButton(true);
-        setInstallStatus('available');
-      }
-    }, 2000);
-
-    // Timeout pour détecter les problèmes
-    const timeout = setTimeout(() => {
-      if (installStatus === 'waiting') {
-        setInstallStatus('error');
-      }
-    }, 10000);
-
-    return () => {
-      window.removeEventListener('pwa-installable', handleInstallable);
-      window.removeEventListener('pwa-installed', handleInstalled);
-      clearInterval(checkInterval);
-      clearTimeout(timeout);
-    };
-  }, [installStatus, showInstallButton]);
-
   const handleFavoritesClick = () => {
     onFavorites();
-  };
-
-  const installPWA = async () => {
-    try {
-      // @ts-ignore
-      if (window.deferredPrompt) {
-        // @ts-ignore
-        const result = await window.deferredPrompt.prompt();
-        
-        // @ts-ignore
-        const choiceResult = await window.deferredPrompt.userChoice;
-        
-        if (choiceResult.outcome === 'accepted') {
-          setInstallStatus('installed');
-        }
-        
-        // @ts-ignore
-        window.deferredPrompt = null;
-        setShowInstallButton(false);
-      } else {
-        setInstallStatus('error');
-      }
-    } catch (error) {
-      setInstallStatus('error');
-    }
-  };
-
-  const getInstallButtonContent = () => {
-    switch (installStatus) {
-      case 'available':
-        return (
-          <>
-            <Download className="w-4 h-4 mr-2" />
-            Installer l'app
-          </>
-        );
-      case 'error':
-        return (
-          <>
-            <AlertCircle className="w-4 h-4 mr-2" />
-            Non installable
-          </>
-        );
-      default:
-        return (
-          <>
-            <Download className="w-4 h-4 mr-2" />
-            Vérification...
-          </>
-        );
-    }
   };
 
   return (
@@ -179,21 +72,6 @@ const QuickActions: React.FC<QuickActionsProps> = ({
           <span className="text-xs">Partager</span>
         </Button>
       </div>
-
-      {/* Bouton d'installation PWA - affiché seulement si disponible ou en erreur */}
-      {showInstallButton && installStatus !== 'installed' && (
-        <Button
-          onClick={installPWA}
-          disabled={installStatus === 'error'}
-          className={`w-full mt-3 font-semibold ${
-            installStatus === 'available' 
-              ? 'bg-prayer-gradient text-white hover:opacity-90' 
-              : 'bg-gray-400 text-white cursor-not-allowed'
-          }`}
-        >
-          {getInstallButtonContent()}
-        </Button>
-      )}
     </Card>
   );
 };
