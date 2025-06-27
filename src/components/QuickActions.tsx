@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from './ui/card';
 import { Button } from './ui/button';
 import { Heart, Shuffle, BookOpen, Bell, Share2, Download } from 'lucide-react';
@@ -25,24 +25,59 @@ const QuickActions: React.FC<QuickActionsProps> = ({
     return saved ? JSON.parse(saved) : [];
   });
 
+  const [showInstallButton, setShowInstallButton] = useState(false);
+
+  useEffect(() => {
+    // Vérifier si PWA est installable
+    const checkInstallability = () => {
+      // @ts-ignore
+      if (window.deferredPrompt) {
+        console.log('🎯 PWA: Bouton installation affiché');
+        setShowInstallButton(true);
+      }
+    };
+
+    // Vérifier immédiatement
+    checkInstallability();
+
+    // Écouter l'événement personnalisé
+    window.addEventListener('pwa-installable', checkInstallability);
+
+    return () => {
+      window.removeEventListener('pwa-installable', checkInstallability);
+    };
+  }, []);
+
   const handleFavoritesClick = () => {
     console.log('Bouton favoris cliqué, nombre de favoris:', favorites.length);
     onFavorites();
   };
 
-  const installPWA = () => {
-    // @ts-ignore
-    if (window.deferredPrompt) {
+  const installPWA = async () => {
+    console.log('🚀 PWA: Tentative installation...');
+    try {
       // @ts-ignore
-      window.deferredPrompt.prompt();
-      // @ts-ignore
-      window.deferredPrompt.userChoice.then((choiceResult: any) => {
+      if (window.deferredPrompt) {
+        // @ts-ignore
+        const result = await window.deferredPrompt.prompt();
+        console.log('📊 PWA: Choix utilisateur:', result);
+        
+        // @ts-ignore
+        const choiceResult = await window.deferredPrompt.userChoice;
         if (choiceResult.outcome === 'accepted') {
-          console.log('PWA installée');
+          console.log('✅ PWA: Installation acceptée');
+        } else {
+          console.log('❌ PWA: Installation refusée');
         }
+        
         // @ts-ignore
         window.deferredPrompt = null;
-      });
+        setShowInstallButton(false);
+      } else {
+        console.log('❌ PWA: Pas de prompt disponible');
+      }
+    } catch (error) {
+      console.error('❌ PWA: Erreur installation:', error);
     }
   };
 
@@ -90,8 +125,7 @@ const QuickActions: React.FC<QuickActionsProps> = ({
         </Button>
       </div>
 
-      {/* @ts-ignore */}
-      {window.deferredPrompt && (
+      {showInstallButton && (
         <Button
           onClick={installPWA}
           className="w-full mt-3 bg-prayer-gradient text-white hover:opacity-90 font-semibold"

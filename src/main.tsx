@@ -8,38 +8,37 @@ if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
       .then((registration) => {
-        console.log('✅ Service Worker enregistré avec succès:', registration.scope);
+        console.log('✅ Service Worker enregistré:', registration.scope);
         
-        // Vérifier les mises à jour
         registration.addEventListener('updatefound', () => {
-          console.log('🔄 Nouvelle version du Service Worker disponible');
+          console.log('🔄 Mise à jour SW disponible');
         });
       })
       .catch((error) => {
-        console.error('❌ Échec de l\'enregistrement du Service Worker:', error);
+        console.error('❌ Erreur SW:', error);
       });
-
-    // Écouter les changements de statut du Service Worker
-    navigator.serviceWorker.addEventListener('controllerchange', () => {
-      console.log('🔄 Service Worker contrôleur changé');
-    });
   });
 }
 
-// Gestion de l'installation PWA
+// Gestion PWA installation
 let deferredPrompt: any;
+
 window.addEventListener('beforeinstallprompt', (e) => {
-  console.log('📱 Événement beforeinstallprompt déclenché - PWA installable');
+  console.log('📱 PWA: Installable détecté');
   e.preventDefault();
   deferredPrompt = e;
-  // @ts-ignore
+  // @ts-ignore - Attacher à window pour accès global
   window.deferredPrompt = deferredPrompt;
+  
+  // Dispatch événement personnalisé pour notifier les composants
+  window.dispatchEvent(new CustomEvent('pwa-installable'));
 });
 
-// Détecter l'installation PWA
 window.addEventListener('appinstalled', () => {
-  console.log('✅ PWA installée avec succès');
+  console.log('✅ PWA: Installation réussie');
   deferredPrompt = null;
+  // @ts-ignore
+  window.deferredPrompt = null;
 });
 
 createRoot(document.getElementById("root")!).render(<App />);

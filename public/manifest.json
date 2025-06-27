@@ -14,9 +14,21 @@
   "icons": [
     {
       "src": "/lovable-uploads/44cc5b7e-c6a2-43ec-887b-1d8cf3f39dc5.png",
-      "sizes": "any",
+      "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/lovable-uploads/44cc5b7e-c6a2-43ec-887b-1d8cf3f39dc5.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/lovable-uploads/44cc5b7e-c6a2-43ec-887b-1d8cf3f39dc5.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "shortcuts": [
@@ -28,7 +40,7 @@
       "icons": [
         {
           "src": "/lovable-uploads/44cc5b7e-c6a2-43ec-887b-1d8cf3f39dc5.png",
-          "sizes": "any",
+          "sizes": "192x192",
           "type": "image/png"
         }
       ]
