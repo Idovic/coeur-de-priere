@@ -4,102 +4,104 @@ import { useToast } from '@/hooks/use-toast';
 
 export const usePWAInstall = () => {
   const { toast } = useToast();
-  const [hasShownPrompt, setHasShownPrompt] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
 
   useEffect(() => {
     // Vérifier si PWA est déjà installée
     if (window.matchMedia('(display-mode: standalone)').matches) {
+      console.log('PWA déjà installée');
       return;
     }
 
-    // Vérifier si on a déjà montré le prompt cette session
-    const sessionPromptShown = sessionStorage.getItem('pwa-prompt-shown');
-    if (sessionPromptShown) {
+    // Vérifier le support du navigateur pour PWA
+    const isSupported = 'serviceWorker' in navigator && 'BeforeInstallPromptEvent' in window;
+    if (!isSupported) {
+      console.log('PWA non supportée par ce navigateur');
       return;
     }
 
-    // Vérifier si l'utilisateur a refusé récemment
-    const lastRefused = localStorage.getItem('pwa-install-refused');
-    if (lastRefused) {
-      const refusedTime = parseInt(lastRefused);
-      const daysSinceRefused = (Date.now() - refusedTime) / (1000 * 60 * 60 * 24);
-      if (daysSinceRefused < 7) { // Ne pas redemander pendant 7 jours
-        return;
-      }
-    }
-
-    const handleInstall = async () => {
-      try {
-        // @ts-ignore
-        if (window.deferredPrompt) {
-          // @ts-ignore
-          await window.deferredPrompt.prompt();
-          // @ts-ignore
-          const choiceResult = await window.deferredPrompt.userChoice;
-          
-          if (choiceResult.outcome === 'accepted') {
-            localStorage.removeItem('pwa-install-refused');
-          }
-          
-          // @ts-ignore
-          window.deferredPrompt = null;
-        }
-      } catch (error) {
-        console.error('Erreur installation PWA:', error);
-      }
-    };
-
-    const handleDismiss = () => {
-      localStorage.setItem('pwa-install-refused', Date.now().toString());
-    };
-
-    const showInstallPrompt = () => {
-      if (hasShownPrompt) return;
+    // Gérer l'événement beforeinstallprompt
+    const handleBeforeInstallPrompt = (e: Event) => {
+      console.log('beforeinstallprompt déclenché');
+      // Empêcher le prompt automatique du navigateur
+      e.preventDefault();
+      // Stocker l'événement pour utilisation ultérieure
+      setDeferredPrompt(e);
       
-      setHasShownPrompt(true);
-      sessionStorage.setItem('pwa-prompt-shown', 'true');
+      // Attacher à window pour accès global (fallback)
+      // @ts-ignore
+      window.deferredPrompt = e;
+      
+      // Laisser le navigateur afficher son menu natif
+      // Ne pas montrer de toast personnalisé pour permettre le menu natif
+      console.log('Prompt PWA prêt - le navigateur peut afficher son menu natif');
+    };
 
+    // Gérer l'installation
+    const handleAppInstalled = () => {
+      console.log('PWA installée avec succès');
+      setDeferredPrompt(null);
+      // @ts-ignore
+      window.deferredPrompt = null;
+      
       toast({
-        title: "Installer Cœur de Prière ?",
-        description: "Accédez rapidement à vos prières depuis votre écran d'accueil",
-        duration: 8000,
-        action: (
-          <div className="flex gap-2">
-            <button
-              onClick={handleInstall}
-              className="px-3 py-1 bg-prayer-600 text-white rounded text-sm hover:bg-prayer-700"
-            >
-              Installer
-            </button>
-            <button
-              onClick={handleDismiss}
-              className="px-3 py-1 bg-gray-200 text-gray-700 rounded text-sm hover:bg-gray-300"
-            >
-              Plus tard
-            </button>
-          </div>
-        )
+        title: "Installation réussie !",
+        description: "Cœur de Prière est maintenant installé sur votre appareil",
+        duration: 3000
       });
     };
 
-    // Écouter l'événement installable
-    const handleInstallable = () => {
-      // Attendre un peu avant de montrer le prompt pour une meilleure UX
-      setTimeout(showInstallPrompt, 3000);
-    };
+    // Ajouter les écouteurs d'événements
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    window.addEventListener('appinstalled', handleAppInstalled);
 
-    // Vérifier si prompt déjà disponible
+    // Vérifier si un prompt est déjà disponible
     // @ts-ignore
     if (window.deferredPrompt) {
-      setTimeout(showInstallPrompt, 3000);
+      setDeferredPrompt(window.deferredPrompt);
     }
 
-    window.addEventListener('pwa-installable', handleInstallable);
-
+    // Nettoyer les écouteurs
     return () => {
-      window.removeEventListener('pwa-installable', handleInstallable);
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+      window.removeEventListener('appinstalled', handleAppInstalled);
     };
-  }, [toast, hasShownPrompt]);
+  }, [toast]);
 
-  return null;
+  // Fonction pour déclencher manuellement l'installation (si nécessaire)
+  const triggerInstall = async () => {
+    if (!deferredPrompt) {
+      console.log('Aucun prompt d\'installation disponible');
+      return false;
+    }
+
+    try {
+      // Afficher le prompt d'installation natif
+      await deferredPrompt.prompt();
+      const choiceResult = await deferredPrompt.userChoice;
+      
+      console.log('Choix utilisateur:', choiceResult.outcome);
+      
+      if (choiceResult.outcome === 'accepted') {
+        console.log('Installation acceptée');
+      } else {
+        console.log('Installation refusée');
+      }
+      
+      // Nettoyer le prompt utilisé
+      setDeferredPrompt(null);
+      // @ts-ignore
+      window.deferredPrompt = null;
+      
+      return choiceResult.outcome === 'accepted';
+    } catch (error) {
+      console.error('Erreur lors de l\'installation PWA:', error);
+      return false;
+    }
+  };
+
+  return {
+    canInstall: !!deferredPrompt,
+    triggerInstall
+  };
 };
