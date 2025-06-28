@@ -23,26 +23,20 @@ export const usePWAInstall = () => {
     // Gérer l'événement beforeinstallprompt
     const handleBeforeInstallPrompt = (e: Event) => {
       console.log('beforeinstallprompt déclenché');
-      // Empêcher le prompt automatique du navigateur
-      e.preventDefault();
       // Stocker l'événement pour utilisation ultérieure
       setDeferredPrompt(e);
       
-      // Attacher à window pour accès global (fallback)
-      // @ts-ignore
-      window.deferredPrompt = e;
+      // Attacher à window pour accès global (fallback) avec assertion de type
+      (window as any).deferredPrompt = e;
       
-      // Laisser le navigateur afficher son menu natif
-      // Ne pas montrer de toast personnalisé pour permettre le menu natif
-      console.log('Prompt PWA prêt - le navigateur peut afficher son menu natif');
+      console.log('Prompt PWA prêt - le navigateur affichera son menu natif');
     };
 
     // Gérer l'installation
     const handleAppInstalled = () => {
       console.log('PWA installée avec succès');
       setDeferredPrompt(null);
-      // @ts-ignore
-      window.deferredPrompt = null;
+      (window as any).deferredPrompt = null;
       
       toast({
         title: "Installation réussie !",
@@ -55,10 +49,9 @@ export const usePWAInstall = () => {
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
     window.addEventListener('appinstalled', handleAppInstalled);
 
-    // Vérifier si un prompt est déjà disponible
-    // @ts-ignore
-    if (window.deferredPrompt) {
-      setDeferredPrompt(window.deferredPrompt);
+    // Vérifier si un prompt est déjà disponible avec assertion de type
+    if ((window as any).deferredPrompt) {
+      setDeferredPrompt((window as any).deferredPrompt);
     }
 
     // Nettoyer les écouteurs
@@ -90,8 +83,7 @@ export const usePWAInstall = () => {
       
       // Nettoyer le prompt utilisé
       setDeferredPrompt(null);
-      // @ts-ignore
-      window.deferredPrompt = null;
+      (window as any).deferredPrompt = null;
       
       return choiceResult.outcome === 'accepted';
     } catch (error) {
