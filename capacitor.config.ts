@@ -6,7 +6,7 @@ const config: CapacitorConfig = {
   appName: 'coeur-de-priere',
   webDir: 'dist',
   server: {
-    url: 'https://c5ab9962-9c90-4ed4-9b5d-10a0ad4b6028.lovableproject.com?forceHideBadge=true',
+    url: 'https://coeurdepriere.netlify.app/',
     cleartext: true
   },
   plugins: {

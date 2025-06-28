@@ -57,9 +57,17 @@ npx cap run ios
 - Compte développeur Apple (pour tester sur appareil physique)
 - iPhone/iPad en mode développeur OU simulateur iOS
 
-## Configuration de développement
+## Configuration de production
 
-Le fichier `capacitor.config.ts` est configuré pour utiliser l'URL de développement Lovable, permettant le hot-reload pendant le développement.
+Le fichier `capacitor.config.ts` est configuré pour utiliser votre site Netlify (`https://coeurdepriere.netlify.app/`), ce qui offre plusieurs avantages :
+
+- **Stabilité** : Application indépendante du sandbox Lovable
+- **Performance** : Chargement optimisé depuis Netlify
+- **Mises à jour** : Déployez de nouvelles versions sans recompiler l'app native
+- **Professionnalisme** : URL personnalisée pour votre application
+
+### Important
+Assurez-vous que votre application est bien déployée et accessible sur `https://coeurdepriere.netlify.app/` avant de suivre les étapes ci-dessus.
 
 ## Commandes utiles
 
